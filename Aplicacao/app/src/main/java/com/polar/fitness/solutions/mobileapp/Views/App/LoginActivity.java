@@ -1,4 +1,4 @@
-package com.polar.fitness.solutions.mobileapp.Views;
+package com.polar.fitness.solutions.mobileapp.Views.App;
 
 import androidx.appcompat.app.AppCompatActivity;
 
