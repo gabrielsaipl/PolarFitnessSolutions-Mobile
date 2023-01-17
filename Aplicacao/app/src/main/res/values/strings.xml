@@ -12,4 +12,16 @@
     <string name="StringLogin">Login</string>
     <string name="StringUsername">Username</string>
     <string name="StringPassword">Password</string>
+    <string name="StringRegister">Register</string>
+    <string name="StringRua">Rua</string>
+    <string name="StringLocalidade">Localidade</string>
+    <string name="StringNumero">Número de Telefone</string>
+    <string name="StringRegistar">Registar</string>
+    <string name="StringNIF">NIF</string>
+    <string name="StringCodigoPostal">Código Postal</string>
+    <string-array name="Genero">
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Outro</item>
+    </string-array>
 </resources>
