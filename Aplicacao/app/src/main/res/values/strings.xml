@@ -20,6 +20,12 @@
     <string name="StringNIF">NIF</string>
     <string name="StringCodigoPostal">Código Postal</string>
     <string name="StringOu">OU</string>
+    <string name="strBemVindo">Bem vindo:</string>
+    <string name="StrTreinarBtn">Começar a Treinar</string>
+    <string name="StrNutritionBtn">Planos Nutricionais</string>
+    <string name="StrPhysicalEvaluationBtn">Avalições Físicas</string>
+    <string name="StrMessagesBtn">Mensagens</string>
+
     <string-array name="Genero">
         <item>Feminino</item>
         <item>Masculino</item>
