@@ -25,11 +25,12 @@
         </activity>
         <activity
             android:name=".Views.App.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.login.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
+        <activity
+            android:name=".Views.App.RegisterActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Views.MainActivity"
             android:exported="true"></activity>

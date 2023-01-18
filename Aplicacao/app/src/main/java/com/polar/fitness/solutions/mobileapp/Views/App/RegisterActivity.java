@@ -1,8 +1,10 @@
-package com.polar.fitness.solutions.mobileapp;
+package com.polar.fitness.solutions.mobileapp.Views.App;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.polar.fitness.solutions.mobileapp.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
