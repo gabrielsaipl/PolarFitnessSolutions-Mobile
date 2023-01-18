@@ -12,6 +12,9 @@
         android:theme="@style/Theme.PolarFitnessSolutions"
         tools:targetApi="31">
         <activity
+            android:name=".Views.Drawer.MainMenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".Views.Workout.WorkoutActivity"
             android:exported="false" />
         <activity
@@ -29,11 +32,11 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".Views.App.RegisterActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Views.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>
