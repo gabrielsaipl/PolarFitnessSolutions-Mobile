@@ -19,6 +19,7 @@
     <string name="StringRegistar">Registar</string>
     <string name="StringNIF">NIF</string>
     <string name="StringCodigoPostal">Código Postal</string>
+    <string name="StringOu">OU</string>
     <string-array name="Genero">
         <item>Feminino</item>
         <item>Masculino</item>
