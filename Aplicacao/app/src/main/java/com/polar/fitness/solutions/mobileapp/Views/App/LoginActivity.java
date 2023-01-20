@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     public void onValidateLogin(String token, String username, Context contexto) {
         if (token != null){
             Intent intentLogin = new Intent(this, MainActivity.class);
+            //put extra para mandar o username
             startActivity(intentLogin);
         }
         else {

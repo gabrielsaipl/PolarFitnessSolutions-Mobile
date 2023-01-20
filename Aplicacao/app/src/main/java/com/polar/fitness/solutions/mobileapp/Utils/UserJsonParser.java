@@ -22,20 +22,6 @@ public class UserJsonParser {
             token = success.getString("valor");
             if (!token.equals("yes"))
                 return null;
-
-        //
-
-
-            /*JSONObject jsonLogin = new JSONObject(resposta);
-            jsonLogin.getJSONObject("success");
-            JSONObject obj = jsonLogin.getJSONObject("valor");
-            token = obj.getString("valor");*/
-            /*if(jsonLogin.has("success")){
-                 token = jsonLogin.getString("valor");
-            }
-            if(!token.equals("yes")){
-                return null;
-            }*/
         }catch (JSONException e){
             e.printStackTrace();
         }
