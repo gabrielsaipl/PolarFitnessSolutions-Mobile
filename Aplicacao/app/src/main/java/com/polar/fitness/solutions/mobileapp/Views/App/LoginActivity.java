@@ -31,11 +31,6 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         btLogin = findViewById(R.id.btnLogin);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
-        // Aceder a sharedPreferences
-        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
-        String s1 = sh.getString("etUsername", "");
-        // Definir os valores do username de acordo com as vars da sharedPreferences
-        etUsername.setText(s1);
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +44,14 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     private void validarLogin(View view) {
         String username = etUsername.getText().toString();
         String pass = etPassword.getText().toString();
+        // Aceder a sharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        //definir o Editor para permitir guardar / alterar o valor
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        String s1 = sharedPreferences.getString("etUsername", "");
+        //Inserir valores do editText nas chaves da sharedPreferences
+        myEdit.putString("etUsername", etUsername.getText().toString());
+        myEdit.apply();
 
         if (!ValidarPassword(pass)) {
             etPassword.setError(getString(R.string.StringPassInvalida));

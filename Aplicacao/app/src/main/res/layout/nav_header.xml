@@ -13,17 +13,21 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/nav_profile" />
+
     <TextView
+        android:id="@+id/usernameTvNav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Android Knowledge"
         android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/emailTvNav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="contact@androidknowledge.com"
         android:textColor="@color/white"
-        android:textSize="14sp"
-        android:layout_marginBottom="16dp"/>
+        android:textSize="14sp" />
 </LinearLayout>
