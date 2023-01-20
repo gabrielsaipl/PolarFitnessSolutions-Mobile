@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.polar.fitness.solutions.mobileapp.R;
+import com.polar.fitness.solutions.mobileapp.Views.App.LoginActivity;
+import com.polar.fitness.solutions.mobileapp.Views.Drawer.MainMenuActivity;
+import com.polar.fitness.solutions.mobileapp.Views.Drawer.NutritionFragment;
+import com.polar.fitness.solutions.mobileapp.Views.Drawer.WorkoutFragment;
 import com.polar.fitness.solutions.mobileapp.Views.Workout.WorkoutActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         btnWorkout = findViewById(R.id.btnWorkout);
         btnNutrition = findViewById(R.id.btnNutrition);
         btnPhysicalEvaluation = findViewById(R.id.btnPhysicalEvaluation);
@@ -27,39 +30,47 @@ public class MainActivity extends AppCompatActivity {
         btnWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentWorkout = new Intent(MainActivity.this, WorkoutActivity.class);
-                startActivity(intentWorkout);
+                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
+                String fragment = "WorkoutFragment";
+                intent.putExtra("fragment", fragment);
+                startActivity(intent);
             }
         });
 
         btnNutrition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentNutrition = new Intent();//colocar a nova activity no intent
-                startActivity(intentNutrition);
+                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
+                String fragment = "NutritionFragment";
+                intent.putExtra("fragment", fragment);
+                startActivity(intent);
             }
         });
 
         btnPhysicalEvaluation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentPhysicalEvaluation = new Intent();//colocar a nova activity no intent
-                startActivity(intentPhysicalEvaluation);
+                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
+                String fragment = "PhysicalEvaluationFragment";
+                intent.putExtra("fragment", fragment);
+                startActivity(intent);
             }
         });
 
         btnMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentMessages = new Intent();//colocar a nova activity no intent
-                startActivity(intentMessages);
+                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
+                String fragment = "MessagesFragment";
+                intent.putExtra("fragment", fragment);
+                startActivity(intent);
             }
         });
 
     }
-
-    @Override
-    public void onBackPressed() {
-        Toast.makeText(this, "Não pode voltar atrás", Toast.LENGTH_SHORT).show();
-    }
+    //Impedir ao utilizador de voltar a Login/Register Activity
+    
+    /*public void onBackPressed() {
+        Toast.makeText(this, "Nao pode voltar para tras", Toast.LENGTH_SHORT).show();
+    }*/
 }

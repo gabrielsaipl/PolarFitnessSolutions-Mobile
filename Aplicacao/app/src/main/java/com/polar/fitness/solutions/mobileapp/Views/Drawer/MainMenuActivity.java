@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.SlidingDrawer;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
@@ -39,6 +42,26 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_treinos);
         }
+        Intent intent = getIntent();
+        String fragmentName = intent.getStringExtra("fragment");
+        String workout = "WorkoutFragment";
+        String nutrition = "NutritionFragment";
+        String physical = "PhysicalEvaluationFragment";
+        String messages = "MessagesFragment";
+        Log.e("Test1", "Test1" + fragmentName);
+        if (fragmentName != null && fragmentName.equals(workout)){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutFragment()).commit();
+        }
+        else if (fragmentName != null && fragmentName.equals(nutrition)){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NutritionFragment()).commit();
+        }
+        else if (fragmentName != null && fragmentName.equals(physical)){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PhysicalEvaluationFragment()).commit();
+        }
+        else if (fragmentName != null && fragmentName.equals(messages)){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessagesFragment()).commit();
+        }
+        else Toast.makeText(this, "Not Found", Toast.LENGTH_SHORT).show();
     }
 
 
