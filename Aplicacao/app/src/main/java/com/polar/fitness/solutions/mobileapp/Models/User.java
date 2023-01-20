@@ -38,7 +38,6 @@ public class User implements Serializable {
     }
 
 
-
     //getters and setters
     public int getId() {
         return id;

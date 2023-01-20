@@ -1,9 +1,17 @@
 package com.polar.fitness.solutions.mobileapp.Utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import com.polar.fitness.solutions.mobileapp.Models.Nutrition_plan;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 
 public class UserJsonParser {
 
@@ -22,11 +30,8 @@ public class UserJsonParser {
 
                 users.add(valueString);
             }
-            token = users.get(0);
-            String inscricao = users.get(9);
-            if (inscricao.equals("Inativo")){
-                return null;
-            }
+
+           token = "ola";
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -37,7 +42,7 @@ public class UserJsonParser {
     {
         ArrayList<Nutrition_plan> list = new ArrayList<>();
         try {
-            for(int i = 0; i <resposta.length(); i++)
+            for(int i = 0; i < resposta.length(); i++)
             {
                 JSONObject jsonNutrition_plan = (JSONObject) resposta.get(i);
                 int id = jsonNutrition_plan.getInt("id");
@@ -49,11 +54,15 @@ public class UserJsonParser {
                 Nutrition_plan nutrition_plan = new Nutrition_plan(id, nutritionname, content, client_id, worker_id);
                 list.add(nutrition_plan);
             }
+
+
         } catch (JSONException e)
         {
             e.printStackTrace();
         }
-        return list;
+
+      return list;
+
     }
 
     public static boolean isConnectionInternet(Context context)
