@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.polar.fitness.solutions.mobileapp.R;
 import com.polar.fitness.solutions.mobileapp.Views.Workout.WorkoutActivity;
@@ -55,5 +56,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Não pode voltar atrás", Toast.LENGTH_SHORT).show();
     }
 }
