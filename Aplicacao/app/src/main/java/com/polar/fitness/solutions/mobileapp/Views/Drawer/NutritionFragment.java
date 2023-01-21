@@ -12,10 +12,13 @@ import android.widget.SearchView;
 
 import com.polar.fitness.solutions.mobileapp.Adapters.ListNutrition_planAdapter;
 import com.polar.fitness.solutions.mobileapp.Listeners.nutrition_plansListener;
+import com.polar.fitness.solutions.mobileapp.Models.Nutrition_plan;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.R;
 
-public class NutritionFragment extends Fragment {
+import java.util.ArrayList;
+
+public class NutritionFragment extends Fragment implements nutrition_plansListener {
 
     public static final int CODE_REQUEST_ADICIONAR = 1;
 
@@ -26,7 +29,7 @@ public class NutritionFragment extends Fragment {
     public static final String ID= "id";
     private static final int CODE_REQUEST_EDITAR = 2;
 
-    public void ListNutritionFragment()
+    public  NutritionFragment()
     {
 
     }
@@ -47,8 +50,18 @@ public class NutritionFragment extends Fragment {
         //Associar adaptador á listview
         lvListNutrition.setAdapter(adaptador);
 
-        SingletonGestorUsers.getInstance(getContext()).setNutrition_plansListener((nutrition_plansListener) this);
-
+        SingletonGestorUsers.getInstance(getContext()).setNutrition_plansListener(this);
+        SingletonGestorUsers.getInstance((getContext())).getAllNutrition_plansAPI(getContext());
         return view;
+    }
+
+    @Override
+    public void onRefreshListNutrition_plans(ArrayList<Nutrition_plan> listNutrition_plan)
+    {
+        if(listNutrition_plan != null)
+        {
+            lvListNutrition.setAdapter(new ListNutrition_planAdapter(getContext(), listNutrition_plan));
+        }
+
     }
 }

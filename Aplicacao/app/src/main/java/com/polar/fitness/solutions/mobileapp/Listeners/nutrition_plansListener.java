@@ -6,5 +6,5 @@ import java.util.ArrayList;
 
 public interface nutrition_plansListener {
 
-    void onRefreshListNutrition_plans(ArrayList<Nutrition_plan> nutrition_planList);
+    void onRefreshListNutrition_plans(ArrayList<Nutrition_plan> listNutrition_plan);
 }

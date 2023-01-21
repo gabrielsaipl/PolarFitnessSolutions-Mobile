@@ -33,7 +33,7 @@ public class SingletonGestorUsers {
     private ArrayList<User> users;
     private ArrayList<Nutrition_plan> nutrition_plans;
     private final static String mUrlLogin = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/user/login";
-    private final static String mUrlnutrition_plan = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/nutrition_plan";
+    private final static String mUrlnutrition_plan = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/nutrition_plans";
 
     private LoginListener loginListener;
     private nutrition_plansListener nutrition_plansListener;
