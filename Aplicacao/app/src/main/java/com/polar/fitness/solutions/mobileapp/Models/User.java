@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private int id;
+    private String password;
     private String username;
     private String email;
     private String street;
@@ -13,6 +14,23 @@ public class User implements Serializable {
     private int phone_number;
     private int nif;
 
+    private String gender;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
 
     private enum gender{
@@ -35,6 +53,18 @@ public class User implements Serializable {
         this.area = area;
         this.phone_number = phone_number;
         this.nif = nif;
+    }
+
+    public User(String username, String email,String password, String street, int zip_code, String area, int phone_number, int nif, String gender){
+        this.username =  username;
+        this.email = email;
+        this.password = password;
+        this.street = street;
+        this.zip_code = zip_code;
+        this.area = area;
+        this.phone_number = phone_number;
+        this.nif = nif;
+        this.gender = gender;
     }
 
 
