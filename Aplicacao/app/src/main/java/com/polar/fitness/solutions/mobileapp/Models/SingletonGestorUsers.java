@@ -2,6 +2,7 @@ package com.polar.fitness.solutions.mobileapp.Models;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -104,6 +105,16 @@ public class SingletonGestorUsers {
             @Override
             public void onResponse(String response) {
                 String token = UserJsonParser.parserJsonLogin(response);
+                String client_id = UserJsonParser.parserJsonLogin2(response);
+                System.out.println("before edit text");
+                SharedPreferences sharedPreferences = contexto.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                String s1 = sharedPreferences.getString("client_id", "");
+                myEdit.putString("client_id", client_id);
+                myEdit.apply();
+                String client_id2 = sharedPreferences.getString("client_id", "");
+                System.out.println(client_id2);
+                System.out.println(token);
                 //verificar se o utilizador esta ativo
                 if (token.equals("Ativo") && loginListener!=null){
                         loginListener.onValidateLogin(token,username,contexto);
@@ -177,6 +188,7 @@ public class SingletonGestorUsers {
             Toast.makeText(contexto, R.string.no_internet, Toast.LENGTH_SHORT).show();
             return;
         }
+
         JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlnutrition_plan, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {

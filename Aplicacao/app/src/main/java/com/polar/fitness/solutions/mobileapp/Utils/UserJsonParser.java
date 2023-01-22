@@ -20,6 +20,7 @@ public class UserJsonParser {
     public static String parserJsonLogin(String resposta){
         String token = null;
         String response;
+        String monkey;
         ArrayList<String> users;
         users = new ArrayList<String>();
         try {
@@ -33,12 +34,35 @@ public class UserJsonParser {
                 users.add(valueString);
             }
             token = users.get(9);
-
         }catch (JSONException e){
             e.printStackTrace();
         }
         return token;
     }
+
+    public static String parserJsonLogin2(String resposta){
+        String token = null;
+        String response;
+        String monkey;
+        ArrayList<String> users;
+        users = new ArrayList<String>();
+        try {
+            JSONObject jsonObject = new JSONObject(resposta);
+            Iterator<String> keys = jsonObject.keys();
+
+            while (keys.hasNext()) {
+                String keyValue = (String) keys.next();
+                String valueString = jsonObject.getString(keyValue);
+
+                users.add(valueString);
+            }
+            token = users.get(0);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return token;
+    }
+
     public static ArrayList<Nutrition_plan> parserJsonNutrition_plan(JSONArray resposta)
     {
         ArrayList<Nutrition_plan> list = new ArrayList<>();
