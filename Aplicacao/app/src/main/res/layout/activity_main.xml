@@ -4,47 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.MainActivity">
+    tools:context=".Views.MainActivity"
+    android:background="@drawable/background_screen">
 
     <Button
         android:id="@+id/btnPhysicalEvaluation"
-        android:layout_width="274dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/gradient"
         android:text="@string/StrPhysicalEvaluationBtn"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnNutrition" />
+        app:layout_constraintTop_toBottomOf="@+id/btnWorkout" />
 
     <Button
         android:id="@+id/btnMessages"
-        android:layout_width="274dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/gradient"
         android:text="@string/StrMessagesBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPhysicalEvaluation" />
+        app:layout_constraintTop_toBottomOf="@+id/btnNutrition" />
 
     <Button
         android:id="@+id/btnNutrition"
-        android:layout_width="274dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="48dp"
         android:text="@string/StrNutritionBtn"
+        android:background="@drawable/gradient"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnWorkout" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/strBemVindo"
-        app:layout_constraintBottom_toBottomOf="@+id/imgLogo"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgLogo"
@@ -62,21 +66,22 @@
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/btnWorkout"
-        android:layout_width="274dp"
-        android:layout_height="48dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="48dp"
         android:text="@string/StrTreinarBtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:background="@drawable/gradient"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

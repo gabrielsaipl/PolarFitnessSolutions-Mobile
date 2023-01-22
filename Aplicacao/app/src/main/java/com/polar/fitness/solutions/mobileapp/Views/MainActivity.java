@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         btnPhysicalEvaluation = findViewById(R.id.btnPhysicalEvaluation);
         btnMessages = findViewById(R.id.btnMessages);
         username = findViewById(R.id.tvUsername);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+
         // Aceder a sharedPreferences
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         String s1 = sh.getString("etUsername", "");
