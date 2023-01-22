@@ -21,8 +21,6 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     private Button btRegister,btLogin;
     private EditText etUsername, etPassword;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +37,13 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         });
         SingletonGestorUsers.getInstance(this).setLoginListener(this);
 
+        btRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
+            }
+        });
     }
 
     private void validarLogin(View view) {

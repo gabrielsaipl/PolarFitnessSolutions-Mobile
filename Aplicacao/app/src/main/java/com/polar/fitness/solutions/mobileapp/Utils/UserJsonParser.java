@@ -39,7 +39,6 @@ public class UserJsonParser {
         }
         return token;
     }
-
     public static ArrayList<Nutrition_plan> parserJsonNutrition_plan(JSONArray resposta)
     {
         ArrayList<Nutrition_plan> list = new ArrayList<>();
@@ -126,4 +125,31 @@ public class UserJsonParser {
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
     }
-}
+
+
+    public static String parserJsonRegister(String resposta){
+        String token = null;
+        System.out.println("Estou no Metodo parserJsonRegister");
+        ArrayList<String> users;
+        users = new ArrayList<String>();
+        try {
+            JSONObject jsonObject = new JSONObject(resposta);
+            Iterator<String> keys = jsonObject.keys();
+            while (keys.hasNext()) {
+                String keyValue = (String) keys.next();
+                String valueString = jsonObject.getString(keyValue);
+                users.add(valueString);
+            }
+            System.out.println("preenchi o arraylist users");
+            token = users.get(15);
+            if (token.equals("")){
+                return null;
+            }
+
+            System.out.println("Cheguei ao fim do metodo parserJsonRegistar");
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+            return token;
+        }
+    }
