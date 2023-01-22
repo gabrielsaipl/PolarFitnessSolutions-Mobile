@@ -68,7 +68,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PhysicalEvaluationFragment()).commit();
                 break;
             case R.id.nav_nutricao:
-                fragment = new NutritionFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NutritionFragment()).commit();
                 break;
             case R.id.nav_mensagens:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessagesFragment()).commit();

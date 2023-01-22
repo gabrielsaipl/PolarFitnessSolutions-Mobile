@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btRegistar"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="600dp"
@@ -47,7 +47,7 @@
         android:layout_width="310dp"
         android:layout_height="350dp"
         android:layout_marginStart="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btRegistar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,8 +111,11 @@
                 android:layout_marginTop="24dp"
                 android:ems="10"
                 android:hint="@string/StringCodigoPostal"
-                android:inputType="textPostalAddress"
+                android:inputType="number"
+                android:digits="0123456789-"
+                android:maxLength="8"
                 android:textColorHint="#000000"
+
                 android:textSize="14sp" />
 
             <EditText
@@ -135,6 +138,7 @@
                 android:hint="@string/StringNumero"
                 android:inputType="phone"
                 android:textColorHint="#000000"
+                android:maxLength="9"
                 android:textSize="14sp" />
 
             <EditText
@@ -146,6 +150,7 @@
                 android:hint="@string/StringNIF"
                 android:inputType="number"
                 android:textColorHint="#000000"
+                android:maxLength="9"
                 android:textSize="14sp" />
 
             <Spinner
