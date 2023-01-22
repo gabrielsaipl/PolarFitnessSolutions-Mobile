@@ -79,12 +79,12 @@ public class UserDBHelper extends SQLiteOpenHelper {
                 + nutrition_plan_CLIENT_ID + " INTEGER,"
                 + nutrition_plan_WORKER_ID + " INTEGER);";
         String sqltable3 = "CREATE TABLE " + workout_plan_TABLE_NAME + "("
-                + workout_plan_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + workout_plan_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + workout_plan_WORKOUT_NAME + " TEXT NOT NULL, "
                 + workout_plan_CLIENT_ID + " INTEGER NOT NULL, "
                 + workout_plan_WORKER_ID + " INTEGER NOT NULL);";
         String sqltable4 = "CREATE TABLE " + exercise_TABLE_NAME + "("
-                + exercise_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + exercise_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + exercise_EXERCISE_NAME + " TEXT NOT NULL, "
                 + exercise_MAX_REP + " INTEGER NOT NULL, "
                 + exercise_MIN_REP + " INTEGER NOT NULL, "
