@@ -42,4 +42,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="StringMarcacao">Marcar Consulta</string>
+    <string name="StringConsultas">Consultas de Nutrição</string>
+    <string name="StringPlanos">Planos de Nutrição</string>
 </resources>

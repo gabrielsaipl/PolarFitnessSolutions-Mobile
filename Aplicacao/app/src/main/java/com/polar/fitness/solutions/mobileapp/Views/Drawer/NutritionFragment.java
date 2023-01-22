@@ -1,14 +1,18 @@
 package com.polar.fitness.solutions.mobileapp.Views.Drawer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -18,6 +22,7 @@ import com.polar.fitness.solutions.mobileapp.Models.Nutrition_plan;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.Models.User;
 import com.polar.fitness.solutions.mobileapp.R;
+import com.polar.fitness.solutions.mobileapp.Views.MainActivity;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -27,7 +32,9 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
 
     public static final int CODE_REQUEST_ADICIONAR = 1;
 
+
     private ListView lvListNutrition;
+    private Button btMarcar;
     private ListNutrition_planAdapter adaptador;
     private SearchView searchView;
     public static final String ID= "id";
@@ -44,8 +51,15 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nutrition, container, false);
+                setHasOptionsMenu(true);
+                btMarcar = (Button) view.findViewById(R.id.btnMarcacaoNutricao);
 
-        setHasOptionsMenu(true);
+                btMarcar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startChildFragment();
+            }
+        });
 
         //obter instancia da listview
         lvListNutrition = view.findViewById(R.id.lvListNutritionPlan);
@@ -78,5 +92,12 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
             lvListNutrition.setAdapter(new ListNutrition_planAdapter(getContext(), auxNutrition_plan));
         }
 
+    }
+    private void startChildFragment(){
+        Fragment newFragment = new NutritionBookingFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
