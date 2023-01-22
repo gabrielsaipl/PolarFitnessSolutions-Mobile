@@ -64,8 +64,9 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
     @Override
     public void onRefreshListNutrition_plans(ArrayList<Nutrition_plan> listNutrition_plan)
     {
-
-        int s2 = 4;
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String s1 = sharedPreferences.getString("client_id", "");
+        int s2 = Integer.parseInt(s1);
         ArrayList<Nutrition_plan> auxNutrition_plan = new ArrayList<>();
         for (Nutrition_plan nutrition_plan: SingletonGestorUsers.getInstance(getContext()).getNutrition_plansBD()) {
             if (nutrition_plan.getClient_id() == s2){
