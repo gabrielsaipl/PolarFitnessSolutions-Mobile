@@ -14,10 +14,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.polar.fitness.solutions.mobileapp.Listeners.LoginListener;
-import com.polar.fitness.solutions.mobileapp.Listeners.nutrition_plansListener;
 import com.polar.fitness.solutions.mobileapp.Listeners.RegisterListener;
+import com.polar.fitness.solutions.mobileapp.Listeners.nutrition_plansListener;
 import com.polar.fitness.solutions.mobileapp.R;
 import com.polar.fitness.solutions.mobileapp.Utils.UserJsonParser;
+import com.polar.fitness.solutions.mobileapp.Views.App.LoginActivity;
 
 import org.json.JSONArray;
 
@@ -26,20 +27,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SingletonGestorUsers {
-    
+
     private static SingletonGestorUsers instancia = null;
     private static RequestQueue volleyQueue = null;
     private UserDBHelper usersDB = null;
     private ArrayList<User> users;
     private ArrayList<Nutrition_plan> nutrition_plans;
-
     private final static String mUrlLogin = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/user/login";
-    private final static String mUrlnutrition_plan = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/nutrition_plans{/client_id=2}";
+    private final static String mUrlnutrition_plan = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/nutrition_plans";
+
     private final static String mUrlSignup = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/user/signup";
+
     private LoginListener loginListener;
     private nutrition_plansListener nutrition_plansListener;
+
     private RegisterListener registerListener;
-    
+    //verificar se ja existe uma instancia do singleton
     public static synchronized SingletonGestorUsers getInstance(Context contexto){
         if (instancia == null) {
             instancia = new SingletonGestorUsers(contexto);
@@ -47,10 +50,11 @@ public class SingletonGestorUsers {
         }
         return instancia;
     }
-    
+    //Construtor fo singleton
     private SingletonGestorUsers(Context contexto) {
         users = new ArrayList<>();
         usersDB = new UserDBHelper(contexto);
+        nutrition_plans = new ArrayList<>();
     }
 
     public ArrayList<Nutrition_plan> getNutrition_plansBD() {
@@ -84,23 +88,30 @@ public class SingletonGestorUsers {
         this.nutrition_plansListener = nutrition_plansListener;
     }
 
-
+    //funcao de login pela api
     public void loginAPI(final String username,final String password, Context contexto){
-
+        //Request a API
         StringRequest req = new StringRequest(Request.Method.POST, mUrlLogin, new Response.Listener<String>() {
+            //ao receber uma resposta valida da api
             @Override
             public void onResponse(String response) {
                 String token = UserJsonParser.parserJsonLogin(response);
-                if(loginListener!=null){
-                    loginListener.onValidateLogin(token,username,contexto);
+                //verificar se o utilizador esta ativo
+                if (token.equals("Ativo") && loginListener!=null){
+                        loginListener.onValidateLogin(token,username,contexto);
+                    }
+                else if (token.equals("Inativo")){
+                    Toast.makeText(contexto, R.string.StringAtivarConta, Toast.LENGTH_SHORT).show();
                 }
             }
-            }, new Response.ErrorListener(){
-                @Override
+            //se a resposta da api falhar
+        }, new Response.ErrorListener(){
+            @Override
             public void onErrorResponse(VolleyError error){
                 Toast.makeText(contexto, R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
         }) {
+            //parametros para passsar para a api
             @Nullable
             @Override
             protected Map<String, String> getParams(){
@@ -112,33 +123,28 @@ public class SingletonGestorUsers {
         };
         volleyQueue.add(req);
     }
-
+    //Funcao de Registo pela API
     public void RegisterAPI(String username, String email, String password, String rua, String codigoPostal, String localidade, String telefone,  String nif,  String genero, Context contexto){
-        System.out.println("Estou no Metodo RegistarApi");
         StringRequest reqRegister = new StringRequest(Request.Method.POST, mUrlSignup, new Response.Listener<String>() {
-            //depois de receber uma resposta valida da api
+            //ao receber uma resposta valida da api
             @Override
             public void onResponse(String response) {
 
-                    System.out.println("Estou no onValidateSignup");
                 if(registerListener!=null) {
                     registerListener.onValidateSignup(username, email, password, rua, codigoPostal, localidade, telefone, nif, genero, contexto);
                 }
-                System.out.println("Cheguei ao fim do Metodo onResponse");
             }
             //se a resposta da api falhar
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Saltei o metodo onResponse e estou no Metodo onErrorResponse");
                 Toast.makeText(contexto, R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
-    }) {
+        }) {
             //parametros para passsar para a api
             @Nullable
             @Override
             protected Map<String, String> getParams(){
-                System.out.println("Estou no Metodo getParams");
                 Map<String, String> params = new HashMap<>();
                 params.put("username",username);
                 params.put("email",email);
@@ -154,9 +160,8 @@ public class SingletonGestorUsers {
             }
         };
         volleyQueue.add(reqRegister);
-}
+    }
 
-    //Método para ir buscar todos os planos de nutrição a API
     public void getAllNutrition_plansAPI(final Context contexto)
     {
         if(!UserJsonParser.isConnectionInternet(contexto))
@@ -171,7 +176,6 @@ public class SingletonGestorUsers {
                 addNutrition_plansBD(nutrition_plans);
                 if(nutrition_plansListener!=null)
                 {
-
                     nutrition_plansListener.onRefreshListNutrition_plans(nutrition_plans);
                 }
 
@@ -185,7 +189,6 @@ public class SingletonGestorUsers {
         });
         volleyQueue.add(req);
     }
-
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
     }
