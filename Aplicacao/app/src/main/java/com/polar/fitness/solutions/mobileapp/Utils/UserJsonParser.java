@@ -4,7 +4,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.polar.fitness.solutions.mobileapp.Models.Exercise;
 import com.polar.fitness.solutions.mobileapp.Models.Nutrition_plan;
+import com.polar.fitness.solutions.mobileapp.Models.Workout_plan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,6 +63,59 @@ public class UserJsonParser {
         }
 
       return list;
+
+    }
+
+    public static ArrayList<Exercise> parserJsonExercise(JSONArray resposta)
+    {
+        ArrayList<Exercise> list = new ArrayList<>();
+        try {
+            for(int i = 0; i < resposta.length(); i++)
+            {
+                JSONObject jsonExercise = (JSONObject) resposta.get(i);
+                int id = jsonExercise.getInt("id");
+                String exercise_name = jsonExercise.getString("exercise_name");
+                int max_rep = jsonExercise.getInt("max_rep");
+                int min_rep = jsonExercise.getInt("min_rep");
+                int sets = jsonExercise.getInt("sets");
+
+                Exercise exercise = new Exercise(id, exercise_name, max_rep, min_rep, sets);
+                list.add(exercise);
+            }
+
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return list;
+
+    }
+
+    public static ArrayList<Workout_plan> parserJsonWorkout_plan(JSONArray resposta)
+    {
+        ArrayList<Workout_plan> list = new ArrayList<>();
+        try {
+            for(int i = 0; i < resposta.length(); i++)
+            {
+                JSONObject jsonWorkout_plan = (JSONObject) resposta.get(i);
+                int id = jsonWorkout_plan.getInt("id");
+                String workout_name = jsonWorkout_plan.getString("workout_name");
+                int client_id = jsonWorkout_plan.getInt("client_id");
+                int worker_id = jsonWorkout_plan.getInt("worker_id");
+
+                Workout_plan workout_plan = new Workout_plan(id, workout_name, client_id, worker_id);
+                list.add(workout_plan);
+            }
+
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return list;
 
     }
 
