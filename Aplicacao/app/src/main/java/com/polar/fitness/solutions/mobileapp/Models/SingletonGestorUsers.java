@@ -64,16 +64,16 @@ public class SingletonGestorUsers {
         users = new ArrayList<>();
         usersDB = new UserDBHelper(contexto);
         nutrition_plans = new ArrayList<>();
+        workout_plans = new ArrayList<>();
     }
 
     public ArrayList<Nutrition_plan> getNutrition_plansBD() {
         return nutrition_plans = usersDB.getAllNutrition_planBD();
     }
-
-    //Buscar os livros do ficheiro criado para a lista
-    public void setLivros(ArrayList<Nutrition_plan> list) {
-        this.nutrition_plans = list;
+    public ArrayList<Workout_plan> getWorkout_planDB() {
+        return workout_plans = usersDB.getAllWorkout_planDB();
     }
+
     public Nutrition_plan getNutrition_plan(long id) {
         for (Nutrition_plan nutrition_plan : nutrition_plans) {
             return nutrition_plan;
@@ -283,9 +283,9 @@ public class SingletonGestorUsers {
         usersDB.addWorkout_planDB(workout_plan);
     }
 
-    public void addWorkout_plansDB(ArrayList<Workout_plan> workout_plans){
+    public void addWorkout_plansDB(ArrayList<Workout_plan> list){
         usersDB.removeAllWorkout_planDB();
-        for (Workout_plan workout_plan : workout_plans){
+        for (Workout_plan workout_plan : list){
             addWorkout_planDB(workout_plan);
         }
     }
@@ -321,4 +321,6 @@ public class SingletonGestorUsers {
     public void setRegisterListener(RegisterListener registerListener) {
         this.registerListener = registerListener;
     }
+
+
 }

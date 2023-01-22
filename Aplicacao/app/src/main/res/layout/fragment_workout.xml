@@ -5,15 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".Views.Drawer.WorkoutFragment">
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Workout Fragment"
-        android:textColor="@color/blue_primary"
-        android:textSize="30sp" />
 
     <ListView
         android:id="@+id/lvWorkout_plans"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="661dp" />
 </FrameLayout>

@@ -295,9 +295,10 @@ public class UserDBHelper extends SQLiteOpenHelper {
         values.put(workout_plan_WORKER_ID, workout_plan.getWorker_id());
         long id = this.db.insert(workout_plan_TABLE_NAME, null, values);
 
-        if (id> -1){
-            workout_plan.setId((int)id);
-            return  workout_plan;
+        if (id > -1)
+        {
+            workout_plan.setId((int) id);
+            return workout_plan;
         }
         return null;
     }
@@ -321,13 +322,13 @@ public class UserDBHelper extends SQLiteOpenHelper {
     }
 
     //GET ALL
-    public ArrayList<Workout_plan> getAllWorkout_planDB(){
+    public ArrayList<Workout_plan> getAllWorkout_planDB()
+    {
         ArrayList<Workout_plan> listWorkout_plan = new ArrayList<>();
-        Cursor cursor = this.db.query(workout_plan_TABLE_NAME, new String[]{workout_plan_ID,workout_plan_WORKOUT_NAME, workout_plan_CLIENT_ID, workout_plan_WORKER_ID}, null, null, null,null, null);
+        Cursor cursor = this.db.query(workout_plan_TABLE_NAME, new String[]{workout_plan_ID, workout_plan_WORKOUT_NAME, workout_plan_CLIENT_ID, workout_plan_WORKER_ID}, null, null, null,null, null);
         if(cursor.moveToFirst()){
             do{
-                Workout_plan aux = new Workout_plan(
-                        cursor.getInt(0),
+                Workout_plan aux = new Workout_plan(cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getInt(2),
                         cursor.getInt(3));

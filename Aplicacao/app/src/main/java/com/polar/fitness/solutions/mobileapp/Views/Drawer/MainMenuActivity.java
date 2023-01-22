@@ -62,13 +62,13 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         Fragment fragment = null;
         switch (item.getItemId()) {
             case R.id.nav_treinos:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutFragment()).commit();
+                fragment = new WorkoutFragment();
                 break;
             case R.id.nav_aval_fisicas:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PhysicalEvaluationFragment()).commit();
                 break;
             case R.id.nav_nutricao:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NutritionFragment()).commit();
+                fragment = new NutritionFragment();
                 break;
             case R.id.nav_mensagens:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessagesFragment()).commit();

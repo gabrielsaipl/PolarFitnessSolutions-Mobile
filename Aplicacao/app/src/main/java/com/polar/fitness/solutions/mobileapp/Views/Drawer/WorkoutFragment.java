@@ -39,10 +39,10 @@ public class WorkoutFragment extends Fragment implements Workout_plansListener {
         setHasOptionsMenu(true);
 
         lvWorkout_plan = view.findViewById(R.id.lvWorkout_plans);
-        adapter = new ListWorkout_planAdapter(getContext(), SingletonGestorUsers.getInstance(getContext()).getWorkout_plans());
+        adapter = new ListWorkout_planAdapter(getContext(), SingletonGestorUsers.getInstance(getContext()).getWorkout_planDB());
         lvWorkout_plan.setAdapter(adapter);
         SingletonGestorUsers.getInstance(getContext()).setWorkout_plansListener(this);
-        SingletonGestorUsers.getInstance(getContext()).getAllExercisesAPI(getContext());
+        SingletonGestorUsers.getInstance(getContext()).getAllWorkout_plansAPI(getContext());
         return view;
     }
     @Override
