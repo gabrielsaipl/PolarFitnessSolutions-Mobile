@@ -96,17 +96,13 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         // Aceder a sharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         String s1 = sharedPreferences.getString("etUsername", "");
-        String s2 = sharedPreferences.getString("etEmail", "");
+        String s2 = sharedPreferences.getString("email", "");
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.usernameTvNav);
+        TextView emailTvNav = headerView.findViewById(R.id.emailTvNav);
         navUsername.setText(s1);
-        if (email != null) {
-            TextView emailTvNav = headerView.findViewById(R.id.emailTvNav);
-            emailTvNav.setText(s2);
-        } else {
-            TextView emailTvNav = headerView.findViewById(R.id.emailTvNav);
-            emailTvNav.setText ("Email não definido");
-        }
+        emailTvNav.setText(s2);
+
     }
 
     public void loadFragmentsMain()

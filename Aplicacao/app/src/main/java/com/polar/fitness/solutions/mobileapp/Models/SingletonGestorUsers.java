@@ -106,11 +106,14 @@ public class SingletonGestorUsers {
             public void onResponse(String response) {
                 String token = UserJsonParser.parserJsonLogin(response);
                 String client_id = UserJsonParser.parserJsonLogin2(response);
+                String email = UserJsonParser.parserJsonLogin3(response);
                 System.out.println("before edit text");
                 SharedPreferences sharedPreferences = contexto.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
                 String s1 = sharedPreferences.getString("client_id", "");
+                String s2 = sharedPreferences.getString("email", "");
                 myEdit.putString("client_id", client_id);
+                myEdit.putString("email", email);
                 myEdit.apply();
                 String client_id2 = sharedPreferences.getString("client_id", "");
                 System.out.println(client_id2);

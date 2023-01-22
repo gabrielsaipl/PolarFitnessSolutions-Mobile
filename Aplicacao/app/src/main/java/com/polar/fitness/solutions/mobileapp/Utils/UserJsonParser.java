@@ -63,6 +63,29 @@ public class UserJsonParser {
         return token;
     }
 
+    public static String parserJsonLogin3(String resposta){
+        String token = null;
+        String response;
+        String monkey;
+        ArrayList<String> users;
+        users = new ArrayList<String>();
+        try {
+            JSONObject jsonObject = new JSONObject(resposta);
+            Iterator<String> keys = jsonObject.keys();
+
+            while (keys.hasNext()) {
+                String keyValue = (String) keys.next();
+                String valueString = jsonObject.getString(keyValue);
+
+                users.add(valueString);
+            }
+            token = users.get(2);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return token;
+    }
+
     public static ArrayList<Nutrition_plan> parserJsonNutrition_plan(JSONArray resposta)
     {
         ArrayList<Nutrition_plan> list = new ArrayList<>();
