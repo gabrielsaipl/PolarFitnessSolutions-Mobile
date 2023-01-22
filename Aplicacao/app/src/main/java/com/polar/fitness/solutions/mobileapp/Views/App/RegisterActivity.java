@@ -26,8 +26,9 @@ import com.polar.fitness.solutions.mobileapp.Views.MainActivity;
 public class RegisterActivity extends AppCompatActivity implements RegisterListener {
 
     private Button btRegister;
-    private EditText etUsername, etEmail, etPassword, etRua, etLocalidade, etTelefone, etNIF,etCodigoPostal;
+    private EditText etUsername, etEmail, etPassword, etRua, etLocalidade, etTelefone, etNIF, etCodigoPostal;
     private Spinner spinnerGenero;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +67,21 @@ public class RegisterActivity extends AppCompatActivity implements RegisterListe
         String NIF = etNIF.getText().toString();
         String genero = spinnerGenero.getSelectedItem().toString();
 
+        if (!isEtEmpty(username, rua, codigoPostal, localidade, telefone, NIF, genero)){
+            Toast.makeText(this, R.string.StringVazio, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        else if (!mailValidator(email)) {
+            etEmail.setError(getString(R.string.StringMailInvalido));
+            return;
+        }
+        else if (!passwordValidator(pass)) {
+            etPassword.setError(getString(R.string.StringPassInvalida));
+            return;
+        }
 
-        SingletonGestorUsers.getInstance(this).RegisterAPI(username,email,pass,rua,codigoPostal,localidade,telefone,NIF,genero,this);
+        SingletonGestorUsers.getInstance(this).RegisterAPI(username, email, pass, rua, codigoPostal, localidade, telefone, NIF, genero, this);
 
     }
 
@@ -83,6 +96,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterListe
         etUsername.setText(s1);
         etEmail.setText(s2);
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -112,24 +126,30 @@ public class RegisterActivity extends AppCompatActivity implements RegisterListe
 
     @Override
     public void onValidateSignup(String username, String email, String password, String rua, String codigoPostal, String localidade, String telefone, String nif, String genero, Context contexto) {
-        if (username != null){
+        if (username != null) {
             Intent intentLogin = new Intent(this, LoginActivity.class);
             //put extra para mandar o username
             startActivity(intentLogin);
-        }
-        else {
+        } else {
             Toast.makeText(this, R.string.StringRegistoInvalido, Toast.LENGTH_SHORT).show();
             etPassword.setText("");
         }
     }
-    private boolean mailValidator(String mail){
-        if (mail == null || mail.isEmpty())
+
+    private boolean mailValidator(String email) {
+        if (email == null || email.isEmpty())
             return false;
-        boolean valido = Patterns.EMAIL_ADDRESS.matcher(mail).matches();
+        boolean valido = Patterns.EMAIL_ADDRESS.matcher(email).matches();
         return valido;
     }
 
-    public void codPostal(){
+    private boolean passwordValidator(String password) {
+        if (password == null)
+            return false;
+        return password.length() >= 8;
+    }
+
+    public void codPostal() {
         etCodigoPostal.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -143,11 +163,18 @@ public class RegisterActivity extends AppCompatActivity implements RegisterListe
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 5){
-                    s.insert(4,"-");
+                if (s.length() == 5) {
+                    s.insert(4, "-");
                 }
             }
         });
     }
+    //verificar se campos estao vazios
+    private boolean isEtEmpty(String username, String rua, String cdPostal, String localidade, String telefone, String NIF, String genero) {
 
+        if (username.equals("") || rua.equals("") || cdPostal.equals("") || localidade.equals("") || telefone.equals("") || NIF.equals("") || genero.equals("")) {
+            return false;
+        }
+        return true;
+    }
 }
