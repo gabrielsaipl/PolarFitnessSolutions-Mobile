@@ -34,6 +34,8 @@ public class SingletonGestorUsers {
     private ArrayList<Nutrition_plan> nutrition_plans;
     private final static String mUrlLogin = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/user/login";
     private final static String mUrlnutrition_plan = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/nutrition_plans";
+    private final static String mUrlUser = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/user";
+
 
     private LoginListener loginListener;
     private nutrition_plansListener nutrition_plansListener;
@@ -57,8 +59,7 @@ public class SingletonGestorUsers {
         return nutrition_plans = usersDB.getAllNutrition_planBD();
     }
 
-    //Buscar os livros do ficheiro criado para a lista
-    public void setLivros(ArrayList<Nutrition_plan> list) {
+    public void setNutrition_plans(ArrayList<Nutrition_plan> list) {
         this.nutrition_plans = list;
     }
     public Nutrition_plan getNutrition_plan(long id) {
@@ -112,6 +113,7 @@ public class SingletonGestorUsers {
         volleyQueue.add(req);
     }
 
+    //Método para ir buscar todos os planos de nutrição a API
     public void getAllNutrition_plansAPI(final Context contexto)
     {
         if(!UserJsonParser.isConnectionInternet(contexto))
@@ -126,6 +128,7 @@ public class SingletonGestorUsers {
                 addNutrition_plansBD(nutrition_plans);
                 if(nutrition_plansListener!=null)
                 {
+
                     nutrition_plansListener.onRefreshListNutrition_plans(nutrition_plans);
                 }
 
@@ -139,7 +142,6 @@ public class SingletonGestorUsers {
     });
     volleyQueue.add(req);
 }
-
 
 
     public void setLoginListener(LoginListener loginListener) {
