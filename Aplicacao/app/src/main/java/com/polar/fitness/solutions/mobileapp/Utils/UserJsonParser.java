@@ -32,8 +32,8 @@ public class UserJsonParser {
 
                 users.add(valueString);
             }
+            token = users.get(9);
 
-           token = "ola";
         }catch (JSONException e){
             e.printStackTrace();
         }
@@ -129,7 +129,6 @@ public class UserJsonParser {
 
     public static String parserJsonRegister(String resposta){
         String token = null;
-        System.out.println("Estou no Metodo parserJsonRegister");
         ArrayList<String> users;
         users = new ArrayList<String>();
         try {
@@ -140,13 +139,11 @@ public class UserJsonParser {
                 String valueString = jsonObject.getString(keyValue);
                 users.add(valueString);
             }
-            System.out.println("preenchi o arraylist users");
             token = users.get(15);
             if (token.equals("")){
                 return null;
             }
 
-            System.out.println("Cheguei ao fim do metodo parserJsonRegistar");
         }catch (JSONException e) {
             e.printStackTrace();
         }

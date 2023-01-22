@@ -7,6 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PatternMatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterListe
         etNIF = findViewById(R.id.etNIF);
         spinnerGenero = findViewById(R.id.spinnerGenero);
         btRegister = findViewById(R.id.btRegistar);
+        codPostal();
 
         btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +65,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterListe
         String telefone = etTelefone.getText().toString();
         String NIF = etNIF.getText().toString();
         String genero = spinnerGenero.getSelectedItem().toString();
+
+
 
         SingletonGestorUsers.getInstance(this).RegisterAPI(username,email,pass,rua,codigoPostal,localidade,telefone,NIF,genero,this);
 
@@ -115,4 +122,32 @@ public class RegisterActivity extends AppCompatActivity implements RegisterListe
             etPassword.setText("");
         }
     }
+    private boolean mailValidator(String mail){
+        if (mail == null || mail.isEmpty())
+            return false;
+        boolean valido = Patterns.EMAIL_ADDRESS.matcher(mail).matches();
+        return valido;
+    }
+
+    public void codPostal(){
+        etCodigoPostal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 5){
+                    s.insert(4,"-");
+                }
+            }
+        });
+    }
+
 }
