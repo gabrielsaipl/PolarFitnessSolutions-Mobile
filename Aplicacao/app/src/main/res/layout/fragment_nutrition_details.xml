@@ -22,15 +22,16 @@
 
     <TextView
         android:id="@+id/teste3"
-        android:layout_width="297dp"
-        android:layout_height="78dp"
+        android:layout_width="293dp"
+        android:layout_height="440dp"
         android:layout_marginBottom="300dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="60sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teste2" />
+        app:layout_constraintTop_toBottomOf="@+id/teste2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

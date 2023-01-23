@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -19,7 +18,6 @@ import com.polar.fitness.solutions.mobileapp.Listeners.nutrition_plansListener;
 import com.polar.fitness.solutions.mobileapp.Models.Nutrition_plan;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.R;
-import com.polar.fitness.solutions.mobileapp.Views.App.NutritionDetailsFragment;
 
 import java.util.ArrayList;
 
@@ -80,6 +78,28 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
         SingletonGestorUsers.getInstance(getContext()).setNutrition_plansListener(this);
         SingletonGestorUsers.getInstance((getContext())).getAllNutrition_plansAPI(getContext());
         return view;
+    }
+
+    @Override
+    public void onResume(ArrayList<Nutrition_plan> listNutrition_plan) {
+
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String s1 = sharedPreferences.getString("client_id", "");
+        int s2 = Integer.parseInt(s1);
+        ArrayList<Nutrition_plan> auxNutrition_plan = new ArrayList<>();
+        for (Nutrition_plan nutrition_plan : SingletonGestorUsers.getInstance(getContext()).getNutrition_plansBD()) {
+            if (nutrition_plan.getClient_id() == s2) {
+                auxNutrition_plan.add(nutrition_plan);
+            }
+        }
+        if (listNutrition_plan != null) {
+            lvListNutrition.setAdapter(new ListNutrition_planAdapter(getContext(), auxNutrition_plan));
+        }
+        adaptador = new ListNutrition_planAdapter(getContext(), auxNutrition_plan);
+
+
+        lvListNutrition.setAdapter(adaptador);
+        super.onResume();
     }
 
     @Override

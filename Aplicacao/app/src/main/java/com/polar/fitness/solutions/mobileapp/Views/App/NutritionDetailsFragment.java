@@ -47,6 +47,10 @@ public class NutritionDetailsFragment extends Fragment implements nutrition_plan
     }
 
 
+    @Override
+    public void onResume(ArrayList<Nutrition_plan> listNutrition_plan) {
+
+    }
 
     @Override
     public void onRefreshListNutrition_plans(ArrayList<Nutrition_plan> listNutrition_plan) {

@@ -89,8 +89,33 @@ public class Workout_PlanDetailsFragment extends Fragment implements ExercisesLi
 
     }
 
+    @Override
+    public void onResume() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        int s1 = Integer.parseInt(sharedPreferences.getString("wkPlanId", ""));
+        ArrayList<Workout_Plan_Exercise_Relation> aux = new ArrayList<>();
+        for (Workout_Plan_Exercise_Relation relations: SingletonGestorUsers.getInstance(getContext()).getWorkout_plan_exercise_relations()){
+            if (relations.getWorkout_plan_id() == s1){
+                aux.add(relations);
+            }
+        }
+        adapter = new Workout_Plan_Exercise_RelationAdapter(getContext(), aux);
+        ArrayList<Exercise> aux2 = new ArrayList<>();
+        int size = aux.size();
+        int i = 0;
+        while (i < size){
+            Workout_Plan_Exercise_Relation relation = (Workout_Plan_Exercise_Relation) adapter.getItem(i);
+            for (Exercise exercises: SingletonGestorUsers.getInstance(getContext()).getExercisesDB()){
+                if (exercises.getId() == relation.getExercise_id()){
+                    aux2.add(exercises);
+                }
+            }
+            i++;
+        }
+        lvListExercises.setAdapter(new ListWorkout_planDetailsAdapter(getContext(), aux2));
 
-
+        super.onResume();
+    }
 
     @Override
     public void onRefreshListExercises(ArrayList<Exercise> exerciseList) {
