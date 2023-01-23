@@ -19,38 +19,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnPhysicalEvaluation"
-        android:layout_width="250dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/gradient"
-        android:text="@string/StrPhysicalEvaluationBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnWorkout" />
-
-    <Button
-        android:id="@+id/btnMessages"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/gradient"
-        android:text="@string/StrMessagesBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnNutrition" />
-
-    <Button
         android:id="@+id/btnNutrition"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/gradient"
         android:text="@string/StrNutritionBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPhysicalEvaluation" />
+        app:layout_constraintTop_toBottomOf="@+id/btnWorkout" />
 
     <TextView
         android:id="@+id/textView3"
@@ -80,11 +58,11 @@
         android:id="@+id/btnWorkout"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/gradient"
         android:text="@string/StrTreinarBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 

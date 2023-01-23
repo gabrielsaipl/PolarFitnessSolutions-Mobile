@@ -13,7 +13,7 @@ import com.polar.fitness.solutions.mobileapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnWorkout, btnNutrition, btnPhysicalEvaluation, btnMessages;
+    private Button btnWorkout, btnNutrition;
     private TextView username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btnWorkout = findViewById(R.id.btnWorkout);
         btnNutrition = findViewById(R.id.btnNutrition);
-        btnPhysicalEvaluation = findViewById(R.id.btnPhysicalEvaluation);
-        btnMessages = findViewById(R.id.btnMessages);
+
         username = findViewById(R.id.tvUsername);
 
         if(getSupportActionBar() != null){
@@ -56,32 +55,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnPhysicalEvaluation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
-                String fragment = "PhysicalEvaluationFragment";
-                intent.putExtra("fragment", fragment);
-                startActivity(intent);
-            }
-        });
-
-        btnMessages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
-                String fragment = "MessagesFragment";
-                intent.putExtra("fragment", fragment);
-                startActivity(intent);
-            }
-        });
 
     }
-    //Impedir ao utilizador de voltar a Login/Register Activity
-    
-    /*public void onBackPressed() {
-        Toast.makeText(this, "Nao pode voltar para tras", Toast.LENGTH_SHORT).show();
-    }*/
 
     @Override
     protected void onResume() {

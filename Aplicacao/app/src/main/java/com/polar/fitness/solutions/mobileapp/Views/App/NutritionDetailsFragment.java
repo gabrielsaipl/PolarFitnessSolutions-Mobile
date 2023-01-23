@@ -43,13 +43,10 @@ public class NutritionDetailsFragment extends Fragment implements nutrition_plan
         tvConteudo.setText(s2);
 
 
-
-
-
-
-
         return view;
     }
+
+
 
     @Override
     public void onRefreshListNutrition_plans(ArrayList<Nutrition_plan> listNutrition_plan) {

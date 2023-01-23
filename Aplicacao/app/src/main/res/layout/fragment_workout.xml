@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Views.App.WorkoutFragment">
     <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="107dp"
+        android:fontFamily="sans-serif"
+        android:text="Planos de Treino"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="34sp" />
 
     <ListView
         android:id="@+id/lvWorkout_plans"
         android:layout_width="match_parent"
-        android:layout_height="661dp" />
-</FrameLayout>
+        android:layout_height="734dp" />
+</LinearLayout>

@@ -16,12 +16,12 @@
 
         <TextView
             android:id="@+id/tvNutrition_plan_title"
-            style="@android:style/Widget.DeviceDefault.TextView.SpinnerItem"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="sans-serif"
             android:text="TextView"
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="48sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

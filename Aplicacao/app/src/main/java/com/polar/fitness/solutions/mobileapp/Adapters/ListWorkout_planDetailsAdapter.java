@@ -78,11 +78,11 @@ public class ListWorkout_planDetailsAdapter extends BaseAdapter {
         public void update(Exercise exercise) {
             tvNome.setText(exercise.getExercise_name());
             String max_reps = String.valueOf(exercise.getMax_rep());
-            tvMaxReps.setText(max_reps);
+            tvMaxReps.setText("Max_repetições: " + max_reps);
             String min_reps = String.valueOf(exercise.getMin_rep());
-            tvMinReps.setText(min_reps);
+            tvMinReps.setText("Min_repetições: " + min_reps);
             String sets = String.valueOf(exercise.getSets());
-            tvSets.setText(sets);
+            tvSets.setText("Séries: " + sets);
         }
     }
 }

@@ -61,14 +61,8 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_treinos:
                 fragment = new WorkoutFragment();
                 break;
-            case R.id.nav_aval_fisicas:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PhysicalEvaluationFragment()).commit();
-                break;
             case R.id.nav_nutricao:
                 fragment = new NutritionFragment();
-                break;
-            case R.id.nav_mensagens:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessagesFragment()).commit();
                 break;
             case R.id.nav_logout:
                 Toast.makeText(this, "Adeus", Toast.LENGTH_SHORT).show();
@@ -115,10 +109,6 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutFragment()).commit();
         } else if (fragmentName != null && fragmentName.equals(nutrition)) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NutritionFragment()).commit();
-        } else if (fragmentName != null && fragmentName.equals(physical)) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PhysicalEvaluationFragment()).commit();
-        } else if (fragmentName != null && fragmentName.equals(messages)) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MessagesFragment()).commit();
         } else Toast.makeText(this, "Not Found", Toast.LENGTH_SHORT).show();
     }
 

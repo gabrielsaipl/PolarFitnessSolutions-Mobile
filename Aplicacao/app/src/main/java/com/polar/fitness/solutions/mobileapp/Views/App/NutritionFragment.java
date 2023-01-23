@@ -29,7 +29,6 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
     ArrayList<Nutrition_plan> items;
 
     private ListView lvListNutrition;
-    private Button btMarcar;
     private ListNutrition_planAdapter adaptador;
     private SearchView searchView;
     public static final String ID= "id";
@@ -47,18 +46,9 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nutrition, container, false);
                 setHasOptionsMenu(true);
-                btMarcar = (Button) view.findViewById(R.id.btnMarcacaoNutricao);
-
-                btMarcar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startChildFragment();
-            }
-        });
 
         //obter instancia da listview
         lvListNutrition = view.findViewById(R.id.lvListNutritionPlan);
-
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         String s1 = sharedPreferences.getString("client_id", "");
@@ -69,9 +59,9 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
                 auxNutrition_plan.add(nutrition_plan);
             }
         }
-            adaptador = new ListNutrition_planAdapter(getContext(), auxNutrition_plan);
-            lvListNutrition.setAdapter(adaptador);
 
+        adaptador = new ListNutrition_planAdapter(getContext(), auxNutrition_plan);
+        lvListNutrition.setAdapter(adaptador);
         lvListNutrition.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
@@ -87,13 +77,10 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
                 startChildFragment();
             }
         });
-
-
         SingletonGestorUsers.getInstance(getContext()).setNutrition_plansListener(this);
         SingletonGestorUsers.getInstance((getContext())).getAllNutrition_plansAPI(getContext());
         return view;
     }
-
 
     @Override
     public void onRefreshListNutrition_plans(ArrayList<Nutrition_plan> listNutrition_plan)
@@ -111,6 +98,10 @@ public class NutritionFragment extends Fragment implements nutrition_plansListen
         {
             lvListNutrition.setAdapter(new ListNutrition_planAdapter(getContext(), auxNutrition_plan));
         }
+        adaptador = new ListNutrition_planAdapter(getContext(), auxNutrition_plan);
+
+
+        lvListNutrition.setAdapter(adaptador);
 
     }
     private void startChildFragment(){
