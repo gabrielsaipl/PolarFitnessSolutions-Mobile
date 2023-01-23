@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 
 import com.polar.fitness.solutions.mobileapp.Models.Exercise;
 import com.polar.fitness.solutions.mobileapp.Models.Nutrition_plan;
+import com.polar.fitness.solutions.mobileapp.Models.Workout_Plan_Exercise_Relation;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_plan;
 
 import org.json.JSONArray;
@@ -110,6 +111,31 @@ public class UserJsonParser {
         }
 
       return list;
+
+    }
+
+    public static ArrayList<Workout_Plan_Exercise_Relation> parserJsonWorkout_Plan_Exercise_Relation(JSONArray resposta)
+    {
+        ArrayList<Workout_Plan_Exercise_Relation> list = new ArrayList<>();
+        try {
+            for(int i = 0; i < resposta.length(); i++)
+            {
+                JSONObject jsonWorkout_plan_exercise_relation = (JSONObject) resposta.get(i);
+                int id = jsonWorkout_plan_exercise_relation.getInt("id");
+                int workout_plan_id = jsonWorkout_plan_exercise_relation.getInt("workout_plan_id");
+                int exercise_id = jsonWorkout_plan_exercise_relation.getInt("exercise_id");
+
+                Workout_Plan_Exercise_Relation workout_plan_exercise_relation = new Workout_Plan_Exercise_Relation(id, workout_plan_id, exercise_id);
+                list.add(workout_plan_exercise_relation);
+            }
+
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return list;
 
     }
 

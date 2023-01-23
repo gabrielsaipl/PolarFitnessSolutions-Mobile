@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PatternMatcher;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
@@ -19,9 +18,7 @@ import android.widget.Toast;
 
 import com.polar.fitness.solutions.mobileapp.Listeners.RegisterListener;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
-import com.polar.fitness.solutions.mobileapp.Models.User;
 import com.polar.fitness.solutions.mobileapp.R;
-import com.polar.fitness.solutions.mobileapp.Views.MainActivity;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterListener {
 

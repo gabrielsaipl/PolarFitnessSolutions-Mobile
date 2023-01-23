@@ -13,7 +13,6 @@ import android.widget.*;
 import com.polar.fitness.solutions.mobileapp.Listeners.LoginListener;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.R;
-import com.polar.fitness.solutions.mobileapp.Views.MainActivity;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {

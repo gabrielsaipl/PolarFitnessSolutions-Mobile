@@ -13,9 +13,12 @@ import java.util.zip.ZipEntry;
 
 public class UserDBHelper extends SQLiteOpenHelper {
 
-    //Constantes sempre em maiusculas
+
     private final static String DB_NAME = "polarfitnesssolutions";
-    //TABELA user
+
+    //Tabelas
+
+    //user
     private final static String user_TABLE_NAME = "User";
     private final static int DB_VERSION = 1;
     private final static String user_ID = "id";
@@ -27,7 +30,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
     private final static String user_PHONE_NUMBER = "phone_number";
     private final static String user_NIF = "nif";
 
-    //TABELA nutrition_plan
+    //nutrition_plan
     private final static String nutrition_plan_TABLE_NAME = "nutrition_plan";
     private final static String nutrition_plan_ID = "id";
     private final static String nutrition_plan_NUTRITIONNAME = "nutritionname";
@@ -35,20 +38,26 @@ public class UserDBHelper extends SQLiteOpenHelper {
     private final static String nutrition_plan_CLIENT_ID = "client_id";
     private final static String nutrition_plan_WORKER_ID = "worker_id";
 
-    //TABELA workout_plan
+    //workout_plan
     private final static String workout_plan_TABLE_NAME = "workout_plan";
     private final static String workout_plan_ID = "id";
     private final static String workout_plan_WORKOUT_NAME = "workout_name";
     private final static String workout_plan_CLIENT_ID = "client_id";
     private final static String workout_plan_WORKER_ID = "worker_id";
 
-    //TABELA exercise
+    //exercise
     private final static String exercise_TABLE_NAME = "exercise";
     private final static String exercise_ID = "id";
     private final static String exercise_EXERCISE_NAME = "exercise_name";
     private final static String exercise_MAX_REP = "max_rep";
     private final static String exercise_MIN_REP = "min_rep";
     private final static String exercise_SETS = "sets";
+
+    //workout_plan_exercise_relation
+    private final static String workout_plan_exercise_relation_TABLE_NAME = "workout_plan_exercise_relation";
+    private final static String workout_plan_exercise_relation_ID = "id";
+    private final static String workout_plan_exercise_relation_WORKOUT_PLAN_ID = "workout_plan_id";
+    private final static String workout_plan_exercise_relation_EXERCISE_ID = "exercise_id";
     private SQLiteDatabase db;
 
     public UserDBHelper(Context contexto) {
@@ -59,10 +68,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // on below line we are creating
-        // an sqlite query and we are
-        // setting our column names
-        // along with their data types.
+
         String sqltable1 = "CREATE TABLE " + user_TABLE_NAME + " ("
                 + user_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + user_USERNAME + " TEXT,"
@@ -89,10 +95,17 @@ public class UserDBHelper extends SQLiteOpenHelper {
                 + exercise_MAX_REP + " INTEGER NOT NULL, "
                 + exercise_MIN_REP + " INTEGER NOT NULL, "
                 + exercise_SETS + " INTEGER NOT NULL);";
+
+        String sqltable5 = "CREATE TABLE " + workout_plan_exercise_relation_TABLE_NAME + "("
+                + workout_plan_exercise_relation_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + workout_plan_exercise_relation_WORKOUT_PLAN_ID + " INTEGER  NOT NULL,"
+                + workout_plan_exercise_relation_EXERCISE_ID + " INTEGER NOT NULL);";
+
         db.execSQL(sqltable1);
         db.execSQL(sqltable2);
         db.execSQL(sqltable3);
         db.execSQL(sqltable4);
+        db.execSQL(sqltable5);
     }
 
     @Override
@@ -101,13 +114,13 @@ public class UserDBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + nutrition_plan_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + workout_plan_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + exercise_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + workout_plan_exercise_relation_TABLE_NAME);
         this.onCreate(sqLiteDatabase);
     }
 
     //metodos CRUD
 
-    //USER
-    //CREATE
+    //User
     public User addUserBD(User user)
     {
         ContentValues values = new ContentValues();
@@ -129,7 +142,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         }
         return null;
     }
-    //EDIT
+
     public boolean editUserBD(User user)
     {
         ContentValues values = new ContentValues();
@@ -145,13 +158,13 @@ public class UserDBHelper extends SQLiteOpenHelper {
 
         return nreg >0;
     }
-    //DELETE
+
     public boolean removeUserBD(long id)
     {
         int nreg = this.db.delete(user_TABLE_NAME, user_ID + " =?", new String[]{"" + id});
         return nreg > 0;
     }
-    //GET ALL USERS
+
     public ArrayList<User> getAllUserBD()
     {
         ArrayList<User> listUsers = new ArrayList<>();
@@ -173,13 +186,13 @@ public class UserDBHelper extends SQLiteOpenHelper {
         }
         return listUsers;
     }
-    //REMOVE ALL USERS
+
     public void removeAllUsersBD() {
         db.delete(user_TABLE_NAME, null, null);
     }
 
-    //Nutrition_plan
-    //CREATE
+
+    //Planos de nutrição
     public Nutrition_plan addNutrition_planBD(Nutrition_plan nutrition_plan)
     {
         ContentValues values = new ContentValues();
@@ -198,27 +211,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         }
         return null;
     }
-    //EDIT
-    public boolean editNutrition_planBD(Nutrition_plan nutrition_plan)
-    {
 
-        ContentValues values = new ContentValues();
-        values.put(nutrition_plan_ID, nutrition_plan.getId());
-        values.put(nutrition_plan_NUTRITIONNAME, nutrition_plan.getNutritionname());
-        values.put(nutrition_plan_CONTENT, nutrition_plan.getContent());
-        values.put(nutrition_plan_CLIENT_ID, nutrition_plan.getClient_id());
-        values.put(nutrition_plan_WORKER_ID, nutrition_plan.getWorker_id());
-        int nreg = this.db.update(nutrition_plan_TABLE_NAME, values, nutrition_plan_ID + " = ?", new String[]{"" + nutrition_plan.getId()});
-
-        return nreg >0;
-    }
-    //DELETE
-    public boolean removeNutrition_planBD(long id)
-    {
-        int nreg = this.db.delete(nutrition_plan_TABLE_NAME, nutrition_plan_ID + " =?", new String[]{"" + id});
-        return nreg > 0;
-    }
-    //GET ALL Nutrition_plan
     public ArrayList<Nutrition_plan> getAllNutrition_planBD()
     {
         ArrayList<Nutrition_plan> listNutrition_plan = new ArrayList<>();
@@ -237,14 +230,12 @@ public class UserDBHelper extends SQLiteOpenHelper {
         }
         return listNutrition_plan;
     }
-    //REMOVE ALL Nutrition_plan
+
     public void removeAllNutrition_planBD() {
         db.delete(nutrition_plan_TABLE_NAME, null, null);
     }
 
-
-    //EXERCISES
-    //CREATE
+    //Exercícios
     public Exercise addExerciseBD(Exercise exercise){
         ContentValues values = new ContentValues();
         values.put(exercise_ID, exercise.getId());
@@ -261,8 +252,6 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return null;
     }
 
-
-    //GET
     public ArrayList<Exercise> getAllExercisesDB(){
         ArrayList<Exercise> listExercises = new ArrayList<>();
         Cursor cursor =this.db.query(exercise_TABLE_NAME, new String[]{exercise_ID,exercise_EXERCISE_NAME, exercise_MAX_REP, exercise_MIN_REP, exercise_SETS}, null, null, null,null, null);
@@ -280,13 +269,11 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return listExercises;
     }
 
-    //REMOVE ALL
     public void removeAllExercisesDB(){
         db.delete(exercise_TABLE_NAME, null , null);
     }
 
-    //WORKOUT_PLANS
-    //CREATE
+    //Planos de treino
     public Workout_plan addWorkout_planDB(Workout_plan workout_plan){
         ContentValues values = new ContentValues();
         values.put(workout_plan_ID, workout_plan.getId());
@@ -303,7 +290,6 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    //EDIT
     public boolean editWorkout_planDB(Workout_plan workout_plan){
         ContentValues values = new ContentValues();
         values.put(workout_plan_ID, workout_plan.getId());
@@ -315,13 +301,11 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return nreg > 0;
     }
 
-    //DELETE
     public boolean removeWorkout_planDB(long id){
         int nreg = this.db.delete(workout_plan_TABLE_NAME, workout_plan_ID + " =?", new String[]{"" + id});
         return nreg > 0;
     }
 
-    //GET ALL
     public ArrayList<Workout_plan> getAllWorkout_planDB()
     {
         ArrayList<Workout_plan> listWorkout_plan = new ArrayList<>();
@@ -338,8 +322,45 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return listWorkout_plan;
     }
 
-    //REMOVE ALL
     public void removeAllWorkout_planDB(){
         db.delete(workout_plan_TABLE_NAME, null, null);
     }
+
+    //Relaçao Plano de treino e Exercício
+    public Workout_Plan_Exercise_Relation addWorkout_Plan_Exercise_RelationBD(Workout_Plan_Exercise_Relation workout_plan_exercise_relation)
+    {
+        ContentValues values = new ContentValues();
+        values.put(workout_plan_exercise_relation_ID, workout_plan_exercise_relation.getId());
+        values.put(workout_plan_exercise_relation_WORKOUT_PLAN_ID, workout_plan_exercise_relation.getWorkout_plan_id());
+        values.put(workout_plan_exercise_relation_EXERCISE_ID, workout_plan_exercise_relation.getExercise_id());
+        long id = this.db.insert(workout_plan_exercise_relation_TABLE_NAME, null, values);
+
+        if (id > -1)
+        {
+            workout_plan_exercise_relation.setId((int) id);
+            return workout_plan_exercise_relation;
+        }
+
+        return null;
+    }
+    public ArrayList<Workout_Plan_Exercise_Relation> getAllWorkout_Plan_Exercise_RelationBD()
+    {
+        ArrayList<Workout_Plan_Exercise_Relation> listWorkout_Plan_Exercise_Relation = new ArrayList<>();
+        Cursor cursor = this.db.query(workout_plan_exercise_relation_TABLE_NAME, new String[]{workout_plan_exercise_relation_ID, workout_plan_exercise_relation_WORKOUT_PLAN_ID, workout_plan_exercise_relation_EXERCISE_ID}, null, null, null,null, null);
+        if(cursor.moveToFirst()){
+            do{
+                Workout_Plan_Exercise_Relation aux = new Workout_Plan_Exercise_Relation(cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2));
+                listWorkout_Plan_Exercise_Relation.add(aux);
+            }while (cursor.moveToNext());
+        }
+        return listWorkout_Plan_Exercise_Relation;
+    }
+
+    public void removeAllWorkout_Plan_Exercise_Relation()
+    {
+        db.delete(workout_plan_exercise_relation_TABLE_NAME, null, null);
+    }
+
 }

@@ -68,13 +68,11 @@ public class ListNutrition_planAdapter extends BaseAdapter {
         public ViewHolderList(View view)
         {
             tvTitulo = view.findViewById(R.id.tvNutrition_plan_title);
-            tvContent = view.findViewById(R.id.tvNutrition_planContent);
         }
 
         public void update(Nutrition_plan nutrition_plan)
         {
             tvTitulo.setText(nutrition_plan.getNutritionname());
-            tvContent.setText(nutrition_plan.getContent());
         }
 
     }

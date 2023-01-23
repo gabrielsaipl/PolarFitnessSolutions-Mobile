@@ -1,4 +1,4 @@
-package com.polar.fitness.solutions.mobileapp.Views;
+package com.polar.fitness.solutions.mobileapp.Views.App;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,14 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.polar.fitness.solutions.mobileapp.R;
-import com.polar.fitness.solutions.mobileapp.Views.App.LoginActivity;
-import com.polar.fitness.solutions.mobileapp.Views.Drawer.MainMenuActivity;
-import com.polar.fitness.solutions.mobileapp.Views.Drawer.NutritionFragment;
-import com.polar.fitness.solutions.mobileapp.Views.Drawer.WorkoutFragment;
-import com.polar.fitness.solutions.mobileapp.Views.Workout.WorkoutActivity;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -2,7 +2,8 @@ package com.polar.fitness.solutions.mobileapp.Models;
 
 import java.io.Serializable;
 
-public class Nutrition_plan implements Serializable {
+public class Nutrition_plan implements Serializable
+{
     private int id;
     private String nutritionname;
     private String content;

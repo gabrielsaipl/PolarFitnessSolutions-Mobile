@@ -1,6 +1,5 @@
 package com.polar.fitness.solutions.mobileapp.Models;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -16,12 +15,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.polar.fitness.solutions.mobileapp.Listeners.LoginListener;
 import com.polar.fitness.solutions.mobileapp.Listeners.RegisterListener;
+import com.polar.fitness.solutions.mobileapp.Listeners.Workout_Plan_Exercise_RelationListener;
 import com.polar.fitness.solutions.mobileapp.Listeners.nutrition_plansListener;
 import com.polar.fitness.solutions.mobileapp.Listeners.ExercisesListener;
 import com.polar.fitness.solutions.mobileapp.Listeners.Workout_plansListener;
 import com.polar.fitness.solutions.mobileapp.R;
 import com.polar.fitness.solutions.mobileapp.Utils.UserJsonParser;
-import com.polar.fitness.solutions.mobileapp.Views.App.LoginActivity;
 
 import org.json.JSONArray;
 
@@ -34,71 +33,52 @@ public class SingletonGestorUsers {
     private static SingletonGestorUsers instancia = null;
     private static RequestQueue volleyQueue = null;
     private UserDBHelper usersDB = null;
+
+    // Arraylists
     private ArrayList<User> users;
     private ArrayList<Nutrition_plan> nutrition_plans;
     private ArrayList<Exercise> exercises;
     private ArrayList<Workout_plan> workout_plans;
+    private ArrayList<Workout_Plan_Exercise_Relation> workout_plan_exercise_relations;
+
+    // API Urls
     private final static String mUrlLogin = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/user/login";
     private final static String mUrlnutrition_plan = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/nutrition_plans";
-
     private final static String mUrlSignup = "http://10.0.2.2/github/polarfitnesssolutions-portal/polarfitnesssolutions/backend/web/api/user/signup";
     private final static String mUrlAPIexercises = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/exercises";
     private final static String mUrlAPIworkout_plan = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/workoutplans";
+    private final static String mUrlWorkout_Plan_Exercise_Relation = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/workout_plan_exercise_relation";
+
+    //Listeners
     private LoginListener loginListener;
     private nutrition_plansListener nutrition_plansListener;
-
     private RegisterListener registerListener;
-    //verificar se ja existe uma instancia do singleton
     private ExercisesListener exercisesListener;
     private Workout_plansListener workout_plansListener;
+    private Workout_Plan_Exercise_RelationListener workout_plan_exercise_relationListener;
     
-    public static synchronized SingletonGestorUsers getInstance(Context contexto){
+    public static synchronized SingletonGestorUsers getInstance(Context contexto)
+    {
         if (instancia == null) {
             instancia = new SingletonGestorUsers(contexto);
             volleyQueue = Volley.newRequestQueue(contexto);
         }
         return instancia;
     }
-    //Construtor fo singleton
-    private SingletonGestorUsers(Context contexto) {
+
+    //Construtor para o singleton
+    private SingletonGestorUsers(Context contexto)
+    {
         users = new ArrayList<>();
         usersDB = new UserDBHelper(contexto);
         nutrition_plans = new ArrayList<>();
         workout_plans = new ArrayList<>();
+        workout_plan_exercise_relations = new ArrayList<>();
     }
 
-    public ArrayList<Nutrition_plan> getNutrition_plansBD() {
-        return nutrition_plans = usersDB.getAllNutrition_planBD();
-    }
-    public ArrayList<Workout_plan> getWorkout_planDB() {
-        return workout_plans = usersDB.getAllWorkout_planDB();
-    }
-
-    public Nutrition_plan getNutrition_plan(long id) {
-        for (Nutrition_plan nutrition_plan : nutrition_plans) {
-            return nutrition_plan;
-        }
-        return null;
-    }
-
-    public void addNutrition_plansBD(ArrayList<Nutrition_plan> list) {
-        usersDB.removeAllNutrition_planBD();
-        for (Nutrition_plan nutrition_plan : list) {
-            addNutrition_planBD(nutrition_plan);
-        }
-    }
-
-    public void addNutrition_planBD(Nutrition_plan nutrition_plan)
+    //Metodos da API
+    public void loginAPI(final String username,final String password, Context contexto)
     {
-        usersDB.addNutrition_planBD(nutrition_plan);
-    }
-    public void setNutrition_plansListener(nutrition_plansListener nutrition_plansListener)
-    {
-        this.nutrition_plansListener = nutrition_plansListener;
-    }
-
-    //funcao de login pela api
-    public void loginAPI(final String username,final String password, Context contexto){
         //Request a API
         StringRequest req = new StringRequest(Request.Method.POST, mUrlLogin, new Response.Listener<String>() {
             //ao receber uma resposta valida da api
@@ -145,8 +125,8 @@ public class SingletonGestorUsers {
         };
         volleyQueue.add(req);
     }
-    //Funcao de Registo pela API
-    public void RegisterAPI(String username, String email, String password, String rua, String codigoPostal, String localidade, String telefone,  String nif,  String genero, Context contexto){
+    public void RegisterAPI(String username, String email, String password, String rua, String codigoPostal, String localidade, String telefone,  String nif,  String genero, Context contexto)
+    {
         StringRequest reqRegister = new StringRequest(Request.Method.POST, mUrlSignup, new Response.Listener<String>() {
             //ao receber uma resposta valida da api
             @Override
@@ -183,7 +163,6 @@ public class SingletonGestorUsers {
         };
         volleyQueue.add(reqRegister);
     }
-
     public void getAllNutrition_plansAPI(final Context contexto)
     {
         if(!UserJsonParser.isConnectionInternet(contexto))
@@ -212,36 +191,8 @@ public class SingletonGestorUsers {
         });
         volleyQueue.add(req);
     }
-
-    //EXERCISES
-    public ArrayList<Exercise> getExercisesDB(){
-        return exercises = usersDB.getAllExercisesDB();
-    }
-
-    public Exercise getExercise(long id){
-        for (Exercise exercise : exercises){
-            return exercise;
-        }
-        return null;
-    }
-
-    public void setExercisesListener(ExercisesListener exercisesListener)
+    public void getAllExercisesAPI(final Context context)
     {
-        this.exercisesListener = exercisesListener;
-    }
-
-    public void addExerciseDB(Exercise exercise){
-        usersDB.addExerciseBD(exercise);
-    }
-
-    public void addExercisesDB(ArrayList<Exercise> exercises){
-        usersDB.removeAllExercisesDB();
-        for (Exercise exercise: exercises){
-            addExerciseDB(exercise);
-        }
-    }
-
-    public void getAllExercisesAPI(final Context context){
         if (!UserJsonParser.isConnectionInternet(context)) {
             Toast.makeText(context, "Sem acesso à internet", Toast.LENGTH_SHORT).show();
             return;
@@ -264,36 +215,8 @@ public class SingletonGestorUsers {
         });
         volleyQueue.add(request);
     }
-
-
-    //WORKOUTPLANS
-    public ArrayList<Workout_plan> getWorkout_plans(){
-        return workout_plans = usersDB.getAllWorkout_planDB();
-    }
-
-    public Workout_plan getWorkout_plan(){
-        for (Workout_plan workout_plan : workout_plans){
-            return workout_plan;
-        }
-        return null;
-    }
-
-    public void setWorkout_plansListener(Workout_plansListener workout_plansListener) {
-        this.workout_plansListener = workout_plansListener;
-    }
-
-    public void addWorkout_planDB(Workout_plan workout_plan){
-        usersDB.addWorkout_planDB(workout_plan);
-    }
-
-    public void addWorkout_plansDB(ArrayList<Workout_plan> list){
-        usersDB.removeAllWorkout_planDB();
-        for (Workout_plan workout_plan : list){
-            addWorkout_planDB(workout_plan);
-        }
-    }
-
-    public void getAllWorkout_plansAPI(final Context context){
+    public void getAllWorkout_plansAPI(final Context context)
+    {
         if (!UserJsonParser.isConnectionInternet(context)){
             Toast.makeText(context, "Sem acesso à internet", Toast.LENGTH_SHORT).show();
             return;
@@ -316,14 +239,143 @@ public class SingletonGestorUsers {
         });
         volleyQueue.add(request);
     }
+    public void getAllWorkout_plan_exercise_relationAPI(final Context context)
+    {
+        if (!UserJsonParser.isConnectionInternet(context)){
+            Toast.makeText(context, "Sem acesso à internet", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, mUrlWorkout_Plan_Exercise_Relation, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                workout_plan_exercise_relations = UserJsonParser.parserJsonWorkout_Plan_Exercise_Relation(response);
+                addWorkout_plan_exercise_relationsBD(workout_plan_exercise_relations);
+                if (workout_plan_exercise_relationListener != null) {
+                    workout_plan_exercise_relationListener.onRefreshListWorkout_Plan_Exercise_Relation(workout_plan_exercise_relations);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        });
+        volleyQueue.add(request);
+    }
 
-    public void setLoginListener(LoginListener loginListener) {
+    //Listeners
+    public void setExercisesListener(ExercisesListener exercisesListener)
+    {
+        this.exercisesListener = exercisesListener;
+    }
+    public void setLoginListener(LoginListener loginListener)
+    {
         this.loginListener = loginListener;
     }
-
-    public void setRegisterListener(RegisterListener registerListener) {
+    public void setRegisterListener(RegisterListener registerListener)
+    {
         this.registerListener = registerListener;
     }
+    public void setWorkout_plansListener(Workout_plansListener workout_plansListener)
+    {
+        this.workout_plansListener = workout_plansListener;
+    }
+    public void setNutrition_plansListener(nutrition_plansListener nutrition_plansListener)
+    {
+        this.nutrition_plansListener = nutrition_plansListener;
+    }
+    public void setWorkout_plan_exercise_relationListener(Workout_Plan_Exercise_RelationListener workout_plan_exercise_relationListener)
+    {
+        this.workout_plan_exercise_relationListener = workout_plan_exercise_relationListener;
+    }
 
+    //Getters
+    public ArrayList<Nutrition_plan> getNutrition_plansBD()
+    {
+        return nutrition_plans = usersDB.getAllNutrition_planBD();
+    }
+    public Nutrition_plan getNutrition_plan(long id)
+    {
+        for (Nutrition_plan nutrition_plan : nutrition_plans) {
+            return nutrition_plan;
+        }
+        return null;
+    }
+    public ArrayList<Workout_plan> getWorkout_planDB()
+    {
+        return workout_plans = usersDB.getAllWorkout_planDB();
+    }
+    public ArrayList<Workout_Plan_Exercise_Relation> getWorkout_plan_exercise_relations()
+    {
+        return workout_plan_exercise_relations = usersDB.getAllWorkout_Plan_Exercise_RelationBD();
+    }
+    public ArrayList<Workout_plan> getWorkout_plansBD()
+    {
+        return workout_plans = usersDB.getAllWorkout_planDB();
+    }
+    public Workout_plan getWorkout_plan()
+    {
+        for (Workout_plan workout_plan : workout_plans){
+            return workout_plan;
+        }
+        return null;
+    }
+    public ArrayList<Exercise> getExercisesDB()
+    {
+        return exercises = usersDB.getAllExercisesDB();
+    }
+    public Exercise getExercise(long id)
+    {
+        for (Exercise exercise : exercises){
+            return exercise;
+        }
+        return null;
+    }
+
+    //DB Helper
+    public void addWorkout_plansDB(ArrayList<Workout_plan> list)
+    {
+        usersDB.removeAllWorkout_planDB();
+        for (Workout_plan workout_plan : list){
+            addWorkout_planDB(workout_plan);
+        }
+    }
+    public void addWorkout_planDB(Workout_plan workout_plan)
+    {
+        usersDB.addWorkout_planDB(workout_plan);
+    }
+    public void addNutrition_plansBD(ArrayList<Nutrition_plan> list)
+    {
+        usersDB.removeAllNutrition_planBD();
+        for (Nutrition_plan nutrition_plan : list) {
+            addNutrition_planBD(nutrition_plan);
+        }
+    }
+    public void addNutrition_planBD(Nutrition_plan nutrition_plan)
+    {
+        usersDB.addNutrition_planBD(nutrition_plan);
+    }
+    public void addExerciseDB(Exercise exercise)
+    {
+        usersDB.addExerciseBD(exercise);
+    }
+    public void addExercisesDB(ArrayList<Exercise> exercises)
+    {
+        usersDB.removeAllExercisesDB();
+        for (Exercise exercise: exercises){
+            addExerciseDB(exercise);
+        }
+    }
+
+    public void addWorkout_plan_exercise_relationBD(Workout_Plan_Exercise_Relation workout_plan_exercise_relation){
+        usersDB.addWorkout_Plan_Exercise_RelationBD(workout_plan_exercise_relation);
+    }
+    public void addWorkout_plan_exercise_relationsBD(ArrayList<Workout_Plan_Exercise_Relation> list){
+        usersDB.removeAllWorkout_Plan_Exercise_Relation();
+        for (Workout_Plan_Exercise_Relation workout_plan_exercise_relation: workout_plan_exercise_relations){
+            addWorkout_plan_exercise_relationBD(workout_plan_exercise_relation);
+        }
+    }
 
 }
