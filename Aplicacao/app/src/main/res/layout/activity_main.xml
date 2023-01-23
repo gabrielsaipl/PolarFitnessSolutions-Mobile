@@ -7,37 +7,50 @@
     tools:context=".Views.MainActivity"
     android:background="@drawable/background_screen">
 
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="315dp"
+        android:layout_height="259dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/logo_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btnPhysicalEvaluation"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="250dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/gradient"
         android:text="@string/StrPhysicalEvaluationBtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnWorkout" />
 
     <Button
         android:id="@+id/btnMessages"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/gradient"
         android:text="@string/StrMessagesBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnNutrition" />
 
     <Button
         android:id="@+id/btnNutrition"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="48dp"
-        android:text="@string/StrNutritionBtn"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/gradient"
+        android:text="@string/StrNutritionBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPhysicalEvaluation" />
 
     <TextView
         android:id="@+id/textView3"
@@ -46,21 +59,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/strBemVindo"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="405dp"
-        android:layout_height="394dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/logo_black" />
 
     <TextView
         android:id="@+id/tvUsername"
@@ -69,18 +71,20 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:text="TextView"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/btnWorkout"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="48dp"
-        android:text="@string/StrTreinarBtn"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/gradient"
+        android:text="@string/StrTreinarBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
