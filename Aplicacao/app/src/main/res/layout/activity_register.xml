@@ -7,161 +7,165 @@
     android:background="@drawable/background_screen"
     tools:context=".Views.App.RegisterActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="315dp"
-        android:layout_height="259dp"
-        android:layout_marginTop="-20dp"
-        android:src="@drawable/logo_black"
+    <Button
+        android:id="@+id/btRegistar"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="730dp"
+        android:text="@string/StringRegistar"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="345dp"
+        android:layout_height="538dp"
+        android:layout_margin="100dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/custom_edittext"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btRegistar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="310dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/btRegistar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.395"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:hint="Nome"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textColorHint="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="300dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="24dp"
+                    android:ems="10"
+                    android:hint="email"
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="300dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="24dp"
+                    android:ems="10"
+                    android:hint="@string/StringPassword"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etRua"
+                    android:layout_width="300dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="24dp"
+                    android:ems="10"
+                    android:hint="@string/StringRua"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textColorHint="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etCondigoPostal"
+                    android:layout_width="300dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="24dp"
+                    android:digits="0123456789-"
+                    android:ems="10"
+                    android:hint="@string/StringCodigoPostal"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    android:textColorHint="#000000"
+
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etLocalidade"
+                    android:layout_width="300dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="24dp"
+                    android:ems="10"
+                    android:hint="@string/StringLocalidade"
+                    android:inputType="textPersonName"
+                    android:textColorHint="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etTelefone"
+                    android:layout_width="300dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="24dp"
+                    android:ems="10"
+                    android:hint="@string/StringNumero"
+                    android:inputType="phone"
+                    android:maxLength="9"
+                    android:textColorHint="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etNIF"
+                    android:layout_width="300dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="24dp"
+                    android:ems="10"
+                    android:hint="@string/StringNIF"
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:textColorHint="#000000"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerGenero"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="24dp"
+                    android:entries="@array/Genero" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-30dp"
+        android:layout_marginBottom="35dp"
         android:fontFamily="sans-serif"
-        android:text="@string/StringRegister"
+        android:text="@string/StringFacaRegisto"
         android:textColor="@color/black"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <Button
-        android:id="@+id/btRegistar"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="600dp"
-        android:text="@string/StringRegistar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="310dp"
-        android:layout_height="350dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/btRegistar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/etUsername"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="Nome"
-                android:inputType="textPersonName"
-                android:textColor="@color/black"
-                android:textColorHint="#000000"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="300dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="24dp"
-                android:ems="10"
-                android:hint="email"
-                android:inputType="textEmailAddress"
-                android:textColorHint="@color/black"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/etPassword"
-                android:layout_width="300dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="24dp"
-                android:ems="10"
-                android:hint="@string/StringPassword"
-                android:inputType="textPassword"
-                android:textColorHint="@color/black"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/etRua"
-                android:layout_width="300dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="24dp"
-                android:ems="10"
-                android:hint="@string/StringRua"
-                android:inputType="textPersonName"
-                android:textColor="@color/black"
-                android:textColorHint="#000000"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/etCondigoPostal"
-                android:layout_width="300dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="24dp"
-                android:ems="10"
-                android:hint="@string/StringCodigoPostal"
-                android:inputType="number"
-                android:digits="0123456789"
-                android:maxLength="8"
-                android:textColorHint="#000000"
-
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/etLocalidade"
-                android:layout_width="300dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="24dp"
-                android:ems="10"
-                android:hint="@string/StringLocalidade"
-                android:inputType="textPersonName"
-                android:textColorHint="#000000"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/etTelefone"
-                android:layout_width="300dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="24dp"
-                android:ems="10"
-                android:hint="@string/StringNumero"
-                android:inputType="phone"
-                android:textColorHint="#000000"
-                android:maxLength="9"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/etNIF"
-                android:layout_width="300dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="24dp"
-                android:ems="10"
-                android:hint="@string/StringNIF"
-                android:inputType="number"
-                android:textColorHint="#000000"
-                android:maxLength="9"
-                android:textSize="14sp" />
-
-            <Spinner
-                android:id="@+id/spinnerGenero"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="24dp"
-                android:entries="@array/Genero" />
-
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

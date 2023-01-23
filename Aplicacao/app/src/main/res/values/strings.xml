@@ -45,4 +45,5 @@
     <string name="StringMarcacao">Marcar Consulta</string>
     <string name="StringConsultas">Consultas de Nutrição</string>
     <string name="StringPlanos">Planos de Nutrição</string>
+    <string name="StringFacaRegisto">Faça o seu Registo</string>
 </resources>
