@@ -1,5 +1,6 @@
 package com.polar.fitness.solutions.mobileapp.Views.App;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import android.window.OnBackInvokedDispatcher;
 
 
 import com.polar.fitness.solutions.mobileapp.Listeners.LoginListener;
