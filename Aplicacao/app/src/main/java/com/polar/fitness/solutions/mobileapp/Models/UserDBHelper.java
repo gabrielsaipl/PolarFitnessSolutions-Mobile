@@ -121,26 +121,20 @@ public class UserDBHelper extends SQLiteOpenHelper {
     //metodos CRUD
 
     //User
-    public User addUserBD(User user)
+    public ArrayList<String> addUserBD(ArrayList<String> users)
     {
         ContentValues values = new ContentValues();
-        values.put(user_ID, user.getId());
-        values.put(user_USERNAME, user.getUsername());
-        values.put(user_EMAIL, user.getEmail());
-        values.put(user_STREET, user.getStreet());
-        values.put(user_ZIP_CODE, user.getZip_code());
-        values.put(user_AREA, user.getArea());
-        values.put(user_PHONE_NUMBER, user.getPhone_number());
-        values.put(user_NIF, user.getNif());
+        values.put(user_ID, users.get(0));
+        values.put(user_USERNAME, users.get(1));
+        values.put(user_EMAIL, users.get(2));
+        values.put(user_STREET, users.get(3));
+        values.put(user_ZIP_CODE, users.get(4));
+        values.put(user_AREA, users.get(5));
+        values.put(user_PHONE_NUMBER, users.get(6));
+        values.put(user_NIF, users.get(7));
 
-        long id = this.db.insert(user_TABLE_NAME, null, values);
-
-        if(id > -1)
-        {
-            user.setId((int) id);
-            return user;
-        }
-        return null;
+        this.db.insert(user_TABLE_NAME, null, values);
+        return users;
     }
 
     public boolean editUserBD(User user)
@@ -165,7 +159,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return nreg > 0;
     }
 
-    public ArrayList<User> getAllUserBD()
+    public ArrayList<User> getUserBD()
     {
         ArrayList<User> listUsers = new ArrayList<>();
         Cursor cursor = this.db.query(user_TABLE_NAME, new String[]{user_ID, user_USERNAME, user_EMAIL, user_STREET, user_ZIP_CODE, user_AREA, user_PHONE_NUMBER, user_NIF}, null, null, null, null, null);
@@ -177,7 +171,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
-                        cursor.getInt(4),
+                        cursor.getString(4),
                         cursor.getString(5),
                         cursor.getInt(6),
                         cursor.getInt(7));

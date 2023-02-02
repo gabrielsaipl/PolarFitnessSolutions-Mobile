@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+
 import androidx.annotation.Nullable;
 
 import com.android.volley.Request;
@@ -26,13 +27,14 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SingletonGestorUsers {
 
     private static SingletonGestorUsers instancia = null;
     private static RequestQueue volleyQueue = null;
-    private UserDBHelper usersDB = null;
+    private final UserDBHelper usersDB;
 
     // Arraylists
     private ArrayList<User> users;
@@ -84,9 +86,15 @@ public class SingletonGestorUsers {
             //ao receber uma resposta valida da api
             @Override
             public void onResponse(String response) {
-                String token = UserJsonParser.parserJsonLogin(response);
-                String client_id = UserJsonParser.parserJsonLogin2(response);
-                String email = UserJsonParser.parserJsonLogin3(response);
+                ArrayList<String> token = UserJsonParser.parserJsonLogin(response);
+                addUserBD(token);
+                //aceder ao nome do utilizador
+                /*users = usersDB.getUserBD();
+                User user = users.get(0);
+                String name = user.getUsername();
+                System.out.println("NOME DO HOMEM " + name);*/
+                String client_id = token.get(0);
+                String email = token.get(2);
                 System.out.println("before edit text");
                 SharedPreferences sharedPreferences = contexto.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
@@ -99,10 +107,10 @@ public class SingletonGestorUsers {
                 System.out.println(client_id2);
                 System.out.println(token);
                 //verificar se o utilizador esta ativo
-                if (token.equals("Ativo") && loginListener!=null){
+                if (token.get(9).equals("Ativo") && loginListener!=null){
                         loginListener.onValidateLogin(token,username,contexto);
                     }
-                else if (token.equals("Inativo")){
+                else if (token.get(9).equals("Inativo")){
                     Toast.makeText(contexto, R.string.StringAtivarConta, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -378,4 +386,7 @@ public class SingletonGestorUsers {
         }
     }
 
+    public void addUserBD(ArrayList<String> user){
+        usersDB.addUserBD(user);
+    }
 }

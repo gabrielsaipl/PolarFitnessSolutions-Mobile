@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 
 import com.polar.fitness.solutions.mobileapp.Models.Exercise;
 import com.polar.fitness.solutions.mobileapp.Models.Nutrition_plan;
+import com.polar.fitness.solutions.mobileapp.Models.User;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_Plan_Exercise_Relation;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_plan;
 
@@ -18,10 +19,7 @@ import java.util.Map;
 
 public class UserJsonParser {
 
-    public static String parserJsonLogin(String resposta){
-        String token = null;
-        String response;
-        String monkey;
+    public static ArrayList<String> parserJsonLogin(String resposta){
         ArrayList<String> users;
         users = new ArrayList<String>();
         try {
@@ -31,60 +29,12 @@ public class UserJsonParser {
             while (keys.hasNext()) {
                 String keyValue = (String) keys.next();
                 String valueString = jsonObject.getString(keyValue);
-
                 users.add(valueString);
             }
-            token = users.get(9);
         }catch (JSONException e){
             e.printStackTrace();
         }
-        return token;
-    }
-
-    public static String parserJsonLogin2(String resposta){
-        String token = null;
-        String response;
-        String monkey;
-        ArrayList<String> users;
-        users = new ArrayList<String>();
-        try {
-            JSONObject jsonObject = new JSONObject(resposta);
-            Iterator<String> keys = jsonObject.keys();
-
-            while (keys.hasNext()) {
-                String keyValue = (String) keys.next();
-                String valueString = jsonObject.getString(keyValue);
-
-                users.add(valueString);
-            }
-            token = users.get(0);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        return token;
-    }
-
-    public static String parserJsonLogin3(String resposta){
-        String token = null;
-        String response;
-        String monkey;
-        ArrayList<String> users;
-        users = new ArrayList<String>();
-        try {
-            JSONObject jsonObject = new JSONObject(resposta);
-            Iterator<String> keys = jsonObject.keys();
-
-            while (keys.hasNext()) {
-                String keyValue = (String) keys.next();
-                String valueString = jsonObject.getString(keyValue);
-
-                users.add(valueString);
-            }
-            token = users.get(2);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        return token;
+        return users;
     }
 
     public static ArrayList<Nutrition_plan> parserJsonNutrition_plan(JSONArray resposta)

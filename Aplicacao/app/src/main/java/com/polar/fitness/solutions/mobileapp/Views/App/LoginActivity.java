@@ -16,6 +16,8 @@ import com.polar.fitness.solutions.mobileapp.Listeners.LoginListener;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.R;
 
+import java.util.ArrayList;
+
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
@@ -88,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
 
     @Override
-    public void onValidateLogin(String token, String username, Context contexto) {
+    public void onValidateLogin(ArrayList<String> token, String username, Context contexto) {
         if (token != null){
             Intent intentLogin = new Intent(this, MainActivity.class);
             //put extra para mandar o username

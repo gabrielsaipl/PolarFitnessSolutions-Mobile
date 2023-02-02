@@ -9,12 +9,14 @@ public class User implements Serializable {
     private String username;
     private String email;
     private String street;
-    private int zip_code;
+    private String zip_code;
     private String area;
     private int phone_number;
     private int nif;
 
     private String gender;
+
+    private String subscription;
 
     public String getPassword() {
         return password;
@@ -32,6 +34,14 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
+    public String getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(String subscription) {
+        this.subscription = subscription;
+    }
+
 
     private enum gender{
         Masculino,
@@ -44,7 +54,7 @@ public class User implements Serializable {
     }
 
     //Construtor
-    public User(int id, String username, String email, String street, int zip_code, String area, int phone_number, int nif){
+    public User(int id, String username, String email, String street, String zip_code, String area, int phone_number, int nif){
         this.id = id;
         this.username =  username;
         this.email = email;
@@ -55,7 +65,7 @@ public class User implements Serializable {
         this.nif = nif;
     }
 
-    public User(String username, String email,String password, String street, int zip_code, String area, int phone_number, int nif, String gender){
+    public User(String username, String email,String password, String street, String zip_code, String area, int phone_number, int nif, String gender){
         this.username =  username;
         this.email = email;
         this.password = password;
@@ -65,6 +75,19 @@ public class User implements Serializable {
         this.phone_number = phone_number;
         this.nif = nif;
         this.gender = gender;
+    }
+    //construtor de informacao de login
+    public User(int id, String username, String email, String street, String zip_code, String area, int phone_number, int nif, String gender, String subscription){
+        this.id = id;
+        this.username =  username;
+        this.email = email;
+        this.street = street;
+        this.zip_code = zip_code;
+        this.area = area;
+        this.phone_number = phone_number;
+        this.nif = nif;
+        this.gender = gender;
+        this.subscription = subscription;
     }
 
 
@@ -101,11 +124,11 @@ public class User implements Serializable {
         this.street = street;
     }
 
-    public int getZip_code() {
+    public String getZip_code() {
         return zip_code;
     }
 
-    public void setZip_code(int zip_code) {
+    public void setZip_code(String zip_code) {
         this.zip_code = zip_code;
     }
 
