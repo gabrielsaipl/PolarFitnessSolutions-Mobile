@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ImageView.Circle"
+        app:srcCompat="@drawable/nav_profile" />
+
+    <ImageView
+        android:id="@+id/edit_profile_picture_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/change_image"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/profile_picture"
+        app:layout_constraintEnd_toEndOf="@id/profile_picture"
+        app:tint="@color/white" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/StringEditarPerfil"
+        android:textSize="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="357dp"
+        android:layout_height="364dp"
+        android:layout_marginTop="-150dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/btEditar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Nome"
+                android:inputType="textPersonName"
+                android:textColor="@color/black"
+                android:textColorHint="#000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="350dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="email"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="350dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="@string/StringPassword"
+                android:inputType="textPassword"
+                android:textColorHint="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etRua"
+                android:layout_width="350dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="@string/StringRua"
+                android:inputType="textPersonName"
+                android:textColor="@color/black"
+                android:textColorHint="#000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etCondigoPostal"
+                android:layout_width="350dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="24dp"
+                android:digits="0123456789-"
+                android:ems="10"
+                android:hint="@string/StringCodigoPostal"
+                android:inputType="number"
+                android:maxLength="8"
+                android:textColorHint="#000000"
+
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etLocalidade"
+                android:layout_width="350dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="@string/StringLocalidade"
+                android:inputType="textPersonName"
+                android:textColorHint="#000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etTelefone"
+                android:layout_width="350dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="@string/StringNumero"
+                android:inputType="phone"
+                android:maxLength="9"
+                android:textColorHint="#000000"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etNIF"
+                android:layout_width="350dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="@string/StringNIF"
+                android:inputType="number"
+                android:maxLength="9"
+                android:textColorHint="#000000"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/spinnerGenero"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:entries="@array/Genero" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btEditar"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="700dp"
+        android:text="@string/StringEditar"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

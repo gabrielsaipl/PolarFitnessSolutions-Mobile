@@ -46,4 +46,6 @@
     <string name="StringConsultas">Consultas de Nutrição</string>
     <string name="StringPlanos">Planos de Nutrição</string>
     <string name="StringFacaRegisto">Faça o seu Registo</string>
+    <string name="StringEditarPerfil">Editar Perfil</string>
+    <string name="StringEditar">Editar</string>
 </resources>
