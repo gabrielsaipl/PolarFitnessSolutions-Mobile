@@ -387,6 +387,11 @@ public class SingletonGestorUsers {
     }
 
     public void addUserBD(ArrayList<String> user){
+        usersDB.removeAllUsersBD();
         usersDB.addUserBD(user);
+    }
+
+    public ArrayList<User> getUser(){
+        return users = usersDB.getUserBD();
     }
 }
