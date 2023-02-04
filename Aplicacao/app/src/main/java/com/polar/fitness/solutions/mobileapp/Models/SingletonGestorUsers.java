@@ -391,7 +391,7 @@ public class SingletonGestorUsers {
         usersDB.addUserBD(user);
     }
 
-    public ArrayList<User> getUser(){
+    public ArrayList<User> getUserBD(){
         return users = usersDB.getUserBD();
     }
 }
