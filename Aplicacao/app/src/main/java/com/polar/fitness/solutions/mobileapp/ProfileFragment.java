@@ -71,7 +71,6 @@ public class ProfileFragment extends Fragment {
 
         SharedPreferences sh = Objects.requireNonNull(getContext()).getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         String s1 = sh.getString("img","");
-        binding.profilePicture.setImageURI(Uri.parse(s1));
         loadImageFromStorage(s1);
 
         binding.editProfilePictureButton.setOnClickListener(editProfilePictureButton -> {imageChooser();});
