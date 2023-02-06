@@ -18,14 +18,14 @@
         android:theme="@style/Theme.PolarFitnessSolutions"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".Nutrition_planDetailsActivity"
-            android:exported="false" />
+
+        <activity android:name=".Views.App.MainActivity"
+            android:exported="false"/>
+
+
         <activity
             android:name=".Views.App.MainMenuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Views.Workout.WorkoutActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".Views.App.SplashScreenActivity"
@@ -43,9 +43,7 @@
         <activity
             android:name=".Views.App.RegisterActivity"
             android:exported="false" />
-        <activity
-            android:name=".Views.App.MainActivity"
-            android:exported="true" />
+
     </application>
 
 </manifest>
