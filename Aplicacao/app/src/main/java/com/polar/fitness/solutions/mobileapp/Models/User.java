@@ -18,6 +18,7 @@ public class User implements Serializable {
 
     private String subscription;
 
+
     public String getPassword() {
         return password;
     }
@@ -26,13 +27,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getGender() {
-        return gender;
-    }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
     public String getSubscription() {
         return subscription;
@@ -54,7 +49,7 @@ public class User implements Serializable {
     }
 
     //Construtor
-    public User(int id, String username, String email, String street, String zip_code, String area, int phone_number, int nif){
+    public User(int id, String username, String email, String street, String zip_code, String area, int phone_number, int nif, String gender){
         this.id = id;
         this.username =  username;
         this.email = email;
@@ -63,6 +58,7 @@ public class User implements Serializable {
         this.area = area;
         this.phone_number = phone_number;
         this.nif = nif;
+        this.gender = gender;
     }
 
     public User(String username, String email,String password, String street, String zip_code, String area, int phone_number, int nif, String gender){
@@ -154,5 +150,11 @@ public class User implements Serializable {
 
     public void setNif(int nif) {
         this.nif = nif;
+    }
+
+    public String getGender() {return gender;}
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

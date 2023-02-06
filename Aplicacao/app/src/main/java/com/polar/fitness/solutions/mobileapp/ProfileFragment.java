@@ -2,7 +2,9 @@ package com.polar.fitness.solutions.mobileapp;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,9 +62,6 @@ public class ProfileFragment extends Fragment {
         binding.editProfilePictureButton.setOnClickListener(editProfilePictureButton -> {
             imageChooser();
         });
-        binding.btEditar.setOnClickListener(btEditar ->{
-            Toast.makeText(getContext(), "ola", Toast.LENGTH_SHORT).show();
-        });
         etUsername = (EditText) view.findViewById(R.id.etUsername);
         etEmail = (EditText) view.findViewById(R.id.etEmail);
         etRua = (EditText) view.findViewById(R.id.etRua);
@@ -72,6 +72,22 @@ public class ProfileFragment extends Fragment {
         spGenero = (Spinner) view.findViewById(R.id.spinnerGenero);
         dados();
 
+        binding.btEditar.setOnClickListener(btEditar ->{
+            String username = etUsername.getText().toString();
+            String email = etEmail.getText().toString();
+            String rua = etRua.getText().toString();
+            String codigoPostal = etCodPostal.getText().toString();
+            String localidade = etLocalidade.getText().toString();
+            String telefone = etTelefone.getText().toString();
+            String NIF = etNIF.getText().toString();
+            String genero = spGenero.getSelectedItem().toString();
+            SingletonGestorUsers.getInstance(getContext()).AtualizarDadosClienteAPI(username, email, rua, codigoPostal, localidade, telefone,NIF, genero,getContext());
+            assert getFragmentManager() != null;
+            FragmentTransaction tr = getFragmentManager().beginTransaction();
+            tr.replace(R.id.fragment_container, ProfileFragment.this);
+            tr.commit();
+            Toast.makeText(getContext(), "Dados alterados com sucesso", Toast.LENGTH_SHORT).show();
+        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -105,6 +121,8 @@ public class ProfileFragment extends Fragment {
         String phone_number = String.valueOf(user.getPhone_number());
         String nif = String.valueOf(user.getNif());
         String genero = user.getGender();
+        System.out.println(genero);
+
         etUsername.setText(username);
         etEmail.setText(email);
         etRua.setText(street);
@@ -133,6 +151,6 @@ public class ProfileFragment extends Fragment {
         String selec = spGenero.getSelectedItem().toString();
         if (!selec.equals(genero)) {spGenero.setSelection(1);}
         String selec1 = spGenero.getSelectedItem().toString();
-        if (!selec.equals(genero)) {spGenero.setSelection(2);}
+        if (!selec1.equals(genero)) {spGenero.setSelection(2);}
     }
 }

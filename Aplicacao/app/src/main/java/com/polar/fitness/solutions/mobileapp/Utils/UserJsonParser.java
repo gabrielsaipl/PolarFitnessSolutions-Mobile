@@ -37,6 +37,34 @@ public class UserJsonParser {
         return users;
     }
 
+    public static ArrayList<String> parserJsonUpdateUser(String resposta){
+        ArrayList<String> users;
+        ArrayList<String> token = new ArrayList<>();
+        users = new ArrayList<String>();
+        try {
+            JSONObject jsonObject = new JSONObject(resposta);
+            Iterator<String> keys = jsonObject.keys();
+
+            while (keys.hasNext()) {
+                String keyValue = (String) keys.next();
+                String valueString = jsonObject.getString(keyValue);
+                users.add(valueString);
+            }
+            token.add(users.get(0));
+            token.add(users.get(1));
+            token.add(users.get(3));
+            token.add(users.get(10));
+            token.add(users.get(11));
+            token.add(users.get(12));
+            token.add(users.get(13));
+            token.add(users.get(14));
+            token.add(users.get(15));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return token;
+    }
+
     public static ArrayList<Nutrition_plan> parserJsonNutrition_plan(JSONArray resposta)
     {
         ArrayList<Nutrition_plan> list = new ArrayList<>();

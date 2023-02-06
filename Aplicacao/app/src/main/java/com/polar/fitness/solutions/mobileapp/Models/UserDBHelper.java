@@ -29,6 +29,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
     private final static String user_AREA = "area";
     private final static String user_PHONE_NUMBER = "phone_number";
     private final static String user_NIF = "nif";
+    private final static String user_GENDER = "gender";
 
     //nutrition_plan
     private final static String nutrition_plan_TABLE_NAME = "nutrition_plan";
@@ -77,7 +78,8 @@ public class UserDBHelper extends SQLiteOpenHelper {
                 + user_ZIP_CODE + " INTEGER,"
                 + user_AREA + " TEXT,"
                 + user_PHONE_NUMBER + " INTEGER,"
-                + user_NIF + " INTEGER);";
+                + user_NIF + " INTEGER,"
+                + user_GENDER + " TEXT);";
         String sqltable2 = "CREATE TABLE " + nutrition_plan_TABLE_NAME + " ("
                 + nutrition_plan_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + nutrition_plan_NUTRITIONNAME + " TEXT,"
@@ -132,6 +134,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         values.put(user_AREA, users.get(5));
         values.put(user_PHONE_NUMBER, users.get(6));
         values.put(user_NIF, users.get(7));
+        values.put(user_GENDER, users.get(8));
 
         this.db.insert(user_TABLE_NAME, null, values);
         return users;
@@ -162,19 +165,22 @@ public class UserDBHelper extends SQLiteOpenHelper {
     public ArrayList<User> getUserBD()
     {
         ArrayList<User> listUsers = new ArrayList<>();
-        Cursor cursor = this.db.query(user_TABLE_NAME, new String[]{user_ID, user_USERNAME, user_EMAIL, user_STREET, user_ZIP_CODE, user_AREA, user_PHONE_NUMBER, user_NIF}, null, null, null, null, null);
+        Cursor cursor = this.db.query(user_TABLE_NAME, new String[]{user_ID, user_USERNAME, user_EMAIL, user_STREET, user_ZIP_CODE, user_AREA, user_PHONE_NUMBER, user_NIF, user_GENDER}, null, null, null, null, null);
         if(cursor.moveToFirst())
         {
             do
             {
-                User user = new User(cursor.getInt(0),
+                User user = new User(
+                        cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
                         cursor.getString(4),
                         cursor.getString(5),
                         cursor.getInt(6),
-                        cursor.getInt(7));
+                        cursor.getInt(7),
+                        cursor.getString(8));
+
                 listUsers.add(user);
             } while (cursor.moveToNext());
         }

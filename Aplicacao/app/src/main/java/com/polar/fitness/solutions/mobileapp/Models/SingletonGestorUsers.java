@@ -1,5 +1,9 @@
 package com.polar.fitness.solutions.mobileapp.Models;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -7,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -51,6 +56,9 @@ public class SingletonGestorUsers {
     private final static String mUrlAPIworkout_plan = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/workoutplans";
     private final static String mUrlWorkout_Plan_Exercise_Relation = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/workout_plan_exercise_relation";
 
+
+
+
     //Listeners
     private LoginListener loginListener;
     private nutrition_plansListener nutrition_plansListener;
@@ -87,16 +95,10 @@ public class SingletonGestorUsers {
             @Override
             public void onResponse(String response) {
                 ArrayList<String> token = UserJsonParser.parserJsonLogin(response);
-                addUserBD(token);
-                //aceder ao nome do utilizador
-                /*users = usersDB.getUserBD();
-                User user = users.get(0);
-                String name = user.getUsername();
-                System.out.println("NOME DO HOMEM " + name);*/
+
                 String client_id = token.get(0);
                 String email = token.get(2);
-                System.out.println("before edit text");
-                SharedPreferences sharedPreferences = contexto.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = contexto.getSharedPreferences("MySharedPref", MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
                 String s1 = sharedPreferences.getString("client_id", "");
                 String s2 = sharedPreferences.getString("email", "");
@@ -104,10 +106,9 @@ public class SingletonGestorUsers {
                 myEdit.putString("email", email);
                 myEdit.apply();
                 String client_id2 = sharedPreferences.getString("client_id", "");
-                System.out.println(client_id2);
-                System.out.println(token);
                 //verificar se o utilizador esta ativo
                 if (token.get(9).equals("Ativo") && loginListener!=null){
+                        addUserBD(token);
                         loginListener.onValidateLogin(token,username,contexto);
                     }
                 else if (token.get(9).equals("Inativo")){
@@ -171,6 +172,43 @@ public class SingletonGestorUsers {
         };
         volleyQueue.add(reqRegister);
     }
+
+    public void AtualizarDadosClienteAPI(String username, String email, String rua, String codigoPostal, String localidade, String telefone,  String nif,  String genero, Context contexto){
+        // Aceder a sharedPreferences
+        SharedPreferences sh = contexto.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String s1 = sh.getString("client_id", "");
+        final String mUrlUpdateUser = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/users/" + s1;
+        StringRequest request = new StringRequest(Request.Method.PUT, mUrlUpdateUser, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                ArrayList<String> token = UserJsonParser.parserJsonUpdateUser(response);
+                addUserBD(token);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username",username);
+                params.put("email",email);
+                params.put("street",rua);
+                params.put("zip_code",codigoPostal);
+                params.put("area",localidade);
+                params.put("phone_number", String.valueOf(telefone));
+                params.put("nif", String.valueOf(nif));
+                params.put("gender",genero);
+
+                return params;
+            }
+        };
+        volleyQueue.add(request);
+    }
+
     public void getAllNutrition_plansAPI(final Context contexto)
     {
         if(!UserJsonParser.isConnectionInternet(contexto))
