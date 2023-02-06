@@ -14,7 +14,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ImageView.Circle"
         app:srcCompat="@drawable/nav_profile" />
 
     <ImageView
@@ -182,6 +181,17 @@
         android:layout_height="55dp"
         android:layout_marginTop="700dp"
         android:text="@string/StringEditar"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btGuardarImagem"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="640dp"
+        android:text="Guardar imagem"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
