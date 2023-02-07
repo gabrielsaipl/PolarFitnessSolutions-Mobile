@@ -10,8 +10,9 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/Nav_Image"
+        android:layout_width="82dp"
+        android:layout_height="88dp"
         android:src="@drawable/nav_profile" />
 
     <TextView

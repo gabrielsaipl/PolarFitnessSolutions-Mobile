@@ -10,10 +10,13 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +24,17 @@ import com.google.android.material.navigation.NavigationView;
 import com.polar.fitness.solutions.mobileapp.ProfileFragment;
 import com.polar.fitness.solutions.mobileapp.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class MainMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private String username, email;
     private NavigationView navigationView;
     private FragmentManager fragmentManager;
+    ImageView drawerImage;
 
 
     @Override
@@ -35,6 +43,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         navigationView = findViewById(R.id.nav_view);
+
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -51,6 +60,8 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         }
         loadFragmentsMain();
         loadUserData();
+
+
     }
 
 
@@ -68,6 +79,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_Perfil:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 break;
+
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -88,11 +100,15 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         String s1 = sharedPreferences.getString("etUsername", "");
         String s2 = sharedPreferences.getString("email", "");
+        String s3 = sharedPreferences.getString("img","");
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.usernameTvNav);
         TextView emailTvNav = headerView.findViewById(R.id.emailTvNav);
+        drawerImage = headerView.findViewById(R.id.Nav_Image);
         navUsername.setText(s1);
         emailTvNav.setText(s2);
+        loadImageFromStorage(s3);
+
     }
 
     public void loadFragmentsMain()
@@ -113,5 +129,20 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
         }else Toast.makeText(this, "Not Found", Toast.LENGTH_SHORT).show();
     }
+    public void loadImageFromStorage(String path)
+    {
+
+        try {
+            File f = new File(path, "profile.png");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            drawerImage.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
