@@ -52,7 +52,6 @@ public class Workout_PlanDetailsFragment extends Fragment implements ExercisesLi
         View view = inflater.inflate(R.layout.fragment_workout__plan_details, container, false);
         setHasOptionsMenu(true);
         tvTitulo = view.findViewById(R.id.tvWkName);
-        System.out.println("4 loop");
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         int s1 = Integer.parseInt(sharedPreferences.getString("wkPlanId", ""));
         String s2 = sharedPreferences.getString("wkPlanName", "");

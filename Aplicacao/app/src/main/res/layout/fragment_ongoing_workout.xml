@@ -7,10 +7,22 @@
     tools:context="OngoingWorkoutFragment">
 
     <TextView
+        android:id="@+id/tvOngoingWorkoutName"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:includeFontPadding="true"
+        android:textAlignment="center"
+        android:textColor="#3395FA"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textViewStopWatch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
         android:gravity="center"
         android:text="00:00:00"
         android:textColor="@color/black"
@@ -19,18 +31,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvOngoingWorkoutName" />
+
+    <ListView
+        android:id="@+id/lvOngoingWorkout_planDetailss"
+        android:layout_width="match_parent"
+        android:layout_height="625dp"
+        app:layout_constraintBottom_toTopOf="@+id/btStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStopWatch" />
 
     <Button
         android:id="@+id/btStop"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:layout_marginTop="692dp"
+        android:layout_marginBottom="50dp"
         android:text="Parar"
         app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
