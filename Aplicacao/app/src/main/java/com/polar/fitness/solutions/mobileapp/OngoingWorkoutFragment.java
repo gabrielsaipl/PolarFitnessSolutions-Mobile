@@ -1,11 +1,12 @@
 package com.polar.fitness.solutions.mobileapp;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.os.SystemClock;
@@ -22,7 +23,11 @@ import com.polar.fitness.solutions.mobileapp.Models.Exercise;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_Plan_Exercise_Relation;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class OngoingWorkoutFragment extends Fragment {
 
@@ -31,11 +36,10 @@ public class OngoingWorkoutFragment extends Fragment {
     private ListWorkout_planDetailsAdapter adapter2;
     long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
     Handler handler;
-    int Seconds, Minutes, MilliSeconds ;
+    int hours, Seconds, Minutes, MilliSeconds ;
     Button Stop;
     TextView tvTimer,tvOngoingWorkoutName;
-
-
+    String dataInicio;
     public OngoingWorkoutFragment() {
         // Required empty public constructor
     }
@@ -58,6 +62,10 @@ public class OngoingWorkoutFragment extends Fragment {
         StartTime = SystemClock.uptimeMillis();
         handler = new Handler() ;
         handler.postDelayed(runnable, 0);
+
+        Date currentTime = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dataInicio = dateFormat.format(currentTime);
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         int s1 = Integer.parseInt(sharedPreferences.getString("wkPlanId", ""));
@@ -93,11 +101,15 @@ public class OngoingWorkoutFragment extends Fragment {
             public void onClick(View view) {
                 TimeBuff += MillisecondTime;
                 handler.removeCallbacks(runnable);
+                String TempoDecorrido = tvTimer.getText().toString();
+                finishWorkout();
             }
         });
 
         return view;
     }
+
+
 
     public Runnable runnable = new Runnable() {
 
@@ -109,18 +121,27 @@ public class OngoingWorkoutFragment extends Fragment {
 
             Seconds = (int) (UpdateTime / 1000);
 
+            hours = Minutes / 60;
+
             Minutes = Seconds / 60;
 
             Seconds = Seconds % 60;
 
             MilliSeconds = (int) (UpdateTime % 1000);
 
-            tvTimer.setText("" + Minutes + ":"
-                    + String.format("%02d", Seconds) + ":"
-                    + String.format("%03d", MilliSeconds));
+            tvTimer.setText(String.format("%02d", hours) + ":" + String.format("%02d", Minutes) + ":"
+                    + String.format("%02d", Seconds));
 
             handler.postDelayed(this, 0);
         }
 
     };
+
+    private void finishWorkout(){
+        Fragment newFragment = new OngoingWorkoutFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

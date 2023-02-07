@@ -7,13 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".StartWorkoutFragment" >
 
-    <TextView
-        android:id="@+id/tvWorkoutPlanTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="665dp" />
-
     <ListView
         android:id="@+id/lvWorkout_planss"
         android:layout_width="match_parent"
@@ -78,6 +71,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="248dp"
+        tools:layout_editor_absoluteY="665dp" />
+
+    <TextView
+        android:id="@+id/tvWorkoutPlanTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="98dp"
         tools:layout_editor_absoluteY="665dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

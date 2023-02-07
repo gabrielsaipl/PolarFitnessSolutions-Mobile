@@ -16,13 +16,12 @@
             android:icon="@drawable/nav_settings"
             android:title="Planos de Treino"/>
         <item
-            android:id="@+id/nav_Perfil"
-            android:icon="@drawable/nav_settings"
-            android:title="Perfil"/>
-
-        <item
             android:id="@+id/nav_nutricao"
             android:icon="@drawable/nav_share"
             android:title="Planos Nutricionais"/>
+        <item
+            android:id="@+id/nav_Perfil"
+            android:icon="@drawable/nav_settings"
+            android:title="Perfil"/>
     </group>
 </menu>
