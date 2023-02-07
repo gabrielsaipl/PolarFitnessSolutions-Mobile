@@ -92,7 +92,7 @@ public class StartWorkoutFragment extends Fragment {
         lvWorkout_plans.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                startChildFragment();
+                startWorkoutPlanList();
                 return false;
             }
         });
@@ -111,16 +111,23 @@ public class StartWorkoutFragment extends Fragment {
                     myEdit.putString("wkPlanId", planId);
                     myEdit.putString("wkPlanName", Title);
                     myEdit.apply();
+                    startWorkout();
+                } else {Toast.makeText(getContext(), "Selecione um plano de treino", Toast.LENGTH_SHORT).show();}
 
-                }
-                Toast.makeText(getContext(), "Selecione um plano de treino", Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
     }
-    private void startChildFragment(){
+    private void startWorkoutPlanList(){
         Fragment newFragment = new Workout_PlanDetailsFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    private void startWorkout(){
+        Fragment newFragment = new OngoingWorkoutFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(null);
