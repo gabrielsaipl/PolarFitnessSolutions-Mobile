@@ -12,7 +12,7 @@
         <item
             android:id="@+id/nav_treinos"
             android:icon="@drawable/nav_settings"
-            android:title="Treinos"/>
+            android:title="Planos de Treino"/>
         <item
             android:id="@+id/nav_nutricao"
             android:icon="@drawable/nav_share"

@@ -11,11 +11,12 @@
         <TextView
             android:id="@+id/tvWorkoutName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:text="TextView"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="34sp" />
+            android:textSize="34sp"
+            android:gravity="center"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
