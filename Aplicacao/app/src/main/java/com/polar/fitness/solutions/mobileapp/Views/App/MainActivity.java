@@ -13,7 +13,7 @@ import com.polar.fitness.solutions.mobileapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnWorkout, btnNutrition;
+    private Button btnWorkout, btnNutrition, btnStartWorkout, btnPerfil;
     private TextView username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btnWorkout = findViewById(R.id.btnWorkout);
         btnNutrition = findViewById(R.id.btnNutrition);
-
+        btnStartWorkout = findViewById(R.id.btnStartWorkout);
+        btnPerfil = findViewById(R.id.btnPerfil);
         username = findViewById(R.id.tvUsername);
 
         if(getSupportActionBar() != null){
@@ -34,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
         // Definir os valores do username de acordo com as vars da sharedPreferences
         username.setText(s1);
 
+        btnStartWorkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
+                String fragment = "StartWorkoutFragment";
+                intent.putExtra("fragment", fragment);
+                startActivity(intent);
+            }
+        });
 
         btnWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
+                String fragment = "ProfileFragment";
+                intent.putExtra("fragment", fragment);
+                startActivity(intent);
+            }
+        });
 
     }
 

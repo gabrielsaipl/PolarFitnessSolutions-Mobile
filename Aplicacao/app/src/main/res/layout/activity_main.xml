@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.MainActivity"
+    tools:context=".Views.App.MainActivity"
     android:background="@drawable/background_screen">
 
     <ImageView
@@ -29,6 +29,18 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnWorkout" />
+
+    <Button
+        android:id="@+id/btnPerfil"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/gradient"
+        android:text="@string/StringEditarPerfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNutrition" />
 
     <TextView
         android:id="@+id/textView3"
@@ -56,6 +68,18 @@
 
     <Button
         android:id="@+id/btnWorkout"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/gradient"
+        android:text="@string/StringPlanosTreino"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartWorkout" />
+
+    <Button
+        android:id="@+id/btnStartWorkout"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="164dp"

@@ -26,6 +26,7 @@
     <string name="StrPhysicalEvaluationBtn">Avalições Físicas</string>
     <string name="StrMessagesBtn">Mensagens</string>
     <string name="StringVazio">Tem de preencher todos os campos</string>
+    <string name="StringPlanosTreino">Planos de Treino</string>
     <string-array name="Genero">
         <item>Feminino</item>
         <item>Masculino</item>
@@ -48,4 +49,6 @@
     <string name="StringFacaRegisto">Faça o seu Registo</string>
     <string name="StringEditarPerfil">Editar Perfil</string>
     <string name="StringEditar">Editar</string>
+    <string name="StringTreinar">Treinar</string>
+    <string name="StringGuardar">Guardar</string>
 </resources>

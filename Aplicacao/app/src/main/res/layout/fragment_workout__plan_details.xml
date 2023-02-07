@@ -27,7 +27,7 @@
         <ListView
             android:id="@+id/lvWorkout_planDetails"
             android:layout_width="match_parent"
-            android:layout_height="759dp" />
+            android:layout_height="640dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.polar.fitness.solutions.mobileapp.ProfileFragment;
 import com.polar.fitness.solutions.mobileapp.R;
+import com.polar.fitness.solutions.mobileapp.StartWorkoutFragment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,15 +62,16 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         loadFragmentsMain();
         loadUserData();
 
-
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
         Fragment fragment = null;
         switch (item.getItemId()) {
+            case R.id.nav_comecar_treino:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StartWorkoutFragment()).commit();
+                break;
             case R.id.nav_treinos:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutFragment()).commit();
                 break;
@@ -120,14 +122,17 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         String physical = "PhysicalEvaluationFragment";
         String messages = "MessagesFragment";
         String profile = "ProfileFragment";
+        String startWorkout = "StartWorkoutFragment";
         Log.e("Test1", "Test1" + fragmentName);
         if (fragmentName != null && fragmentName.equals(workout)) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutFragment()).commit();
         } else if (fragmentName != null && fragmentName.equals(nutrition)) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NutritionFragment()).commit();
+        } else if (fragmentName != null && fragmentName.equals(startWorkout)) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StartWorkoutFragment()).commit();
         } else if (fragmentName != null && fragmentName.equals(profile)) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-        }else Toast.makeText(this, "Not Found", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "Not Found", Toast.LENGTH_SHORT).show();
     }
     public void loadImageFromStorage(String path)
     {

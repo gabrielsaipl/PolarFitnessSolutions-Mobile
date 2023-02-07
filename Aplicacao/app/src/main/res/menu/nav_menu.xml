@@ -5,14 +5,21 @@
     tools:showIn = "navigation_view">
     <group
         android:checkableBehavior="single">
+
+
         <item
-            android:id="@+id/nav_Perfil"
+            android:id="@+id/nav_comecar_treino"
             android:icon="@drawable/nav_settings"
-            android:title="Perfil"/>
+            android:title="Comecar a treinar"/>
         <item
             android:id="@+id/nav_treinos"
             android:icon="@drawable/nav_settings"
             android:title="Planos de Treino"/>
+        <item
+            android:id="@+id/nav_Perfil"
+            android:icon="@drawable/nav_settings"
+            android:title="Perfil"/>
+
         <item
             android:id="@+id/nav_nutricao"
             android:icon="@drawable/nav_share"
