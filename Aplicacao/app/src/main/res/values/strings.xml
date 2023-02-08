@@ -27,6 +27,8 @@
     <string name="StrMessagesBtn">Mensagens</string>
     <string name="StringVazio">Tem de preencher todos os campos</string>
     <string name="StringPlanosTreino">Planos de Treino</string>
+    <string name="Cancelar">Cancelar</string>
+    <string name="Continuar">Continuar</string>
     <string-array name="Genero">
         <item>Feminino</item>
         <item>Masculino</item>

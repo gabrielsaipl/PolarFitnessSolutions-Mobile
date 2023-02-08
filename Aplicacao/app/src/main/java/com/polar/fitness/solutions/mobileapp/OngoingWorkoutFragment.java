@@ -1,6 +1,9 @@
 package com.polar.fitness.solutions.mobileapp;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -22,6 +25,8 @@ import com.polar.fitness.solutions.mobileapp.Adapters.Workout_Plan_Exercise_Rela
 import com.polar.fitness.solutions.mobileapp.Models.Exercise;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_Plan_Exercise_Relation;
+import com.polar.fitness.solutions.mobileapp.Views.App.FinishedWorkoutFragment;
+import com.polar.fitness.solutions.mobileapp.Views.App.WorkoutFragment;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,7 +42,7 @@ public class OngoingWorkoutFragment extends Fragment {
     long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
     Handler handler;
     int hours, Seconds, Minutes, MilliSeconds ;
-    Button Stop;
+    Button Stop, Cancel;
     TextView tvTimer,tvOngoingWorkoutName;
     String dataInicio;
     public OngoingWorkoutFragment() {
@@ -49,6 +54,7 @@ public class OngoingWorkoutFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,16 +64,19 @@ public class OngoingWorkoutFragment extends Fragment {
         lvOngoingWorkoutPlanDetails = view.findViewById(R.id.lvOngoingWorkout_planDetailss);
         tvOngoingWorkoutName = view.findViewById(R.id.tvOngoingWorkoutName);
         Stop = (Button) view.findViewById(R.id.btStop);
+        Cancel = (Button) view.findViewById(R.id.btCancel);
         tvTimer = (TextView) view.findViewById(R.id.textViewStopWatch);
         StartTime = SystemClock.uptimeMillis();
         handler = new Handler() ;
         handler.postDelayed(runnable, 0);
-
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dataInicio = dateFormat.format(currentTime);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        myEdit.putString("dataInicioTreino", dataInicio);
 
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+
         int s1 = Integer.parseInt(sharedPreferences.getString("wkPlanId", ""));
         String s2 = sharedPreferences.getString("wkPlanName", "");
         tvOngoingWorkoutName.setText(s2);
@@ -95,6 +104,28 @@ public class OngoingWorkoutFragment extends Fragment {
         adapter2 = new ListWorkout_planDetailsAdapter(getContext(), aux2);
         lvOngoingWorkoutPlanDetails.setAdapter(adapter2);
 
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                alert.setTitle("Cancelar");
+                alert.setMessage("De certeza que deseja cancelar?");
+                alert.setPositiveButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        TimeBuff += MillisecondTime;
+                        handler.removeCallbacks(runnable);
+                        StartWorkout();
+                    }
+                });
+                alert.setNegativeButton(R.string.Continuar, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close dialog
+                        dialog.cancel();
+                    }
+                });
+                alert.show();
+            }
+        });
 
         Stop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,13 +133,14 @@ public class OngoingWorkoutFragment extends Fragment {
                 TimeBuff += MillisecondTime;
                 handler.removeCallbacks(runnable);
                 String TempoDecorrido = tvTimer.getText().toString();
+                myEdit.putString("TempoTreinoDecorrido", TempoDecorrido);
+                myEdit.apply();
                 finishWorkout();
             }
         });
 
         return view;
     }
-
 
 
     public Runnable runnable = new Runnable() {
@@ -138,7 +170,14 @@ public class OngoingWorkoutFragment extends Fragment {
     };
 
     private void finishWorkout(){
-        Fragment newFragment = new OngoingWorkoutFragment();
+        Fragment newFragment = new FinishedWorkoutFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    private void StartWorkout(){
+        Fragment newFragment = new StartWorkoutFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(null);

@@ -1,5 +1,6 @@
 package com.polar.fitness.solutions.mobileapp.Views.App;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -20,6 +22,7 @@ import com.polar.fitness.solutions.mobileapp.Models.Nutrition_plan;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_plan;
 import com.polar.fitness.solutions.mobileapp.R;
+import com.polar.fitness.solutions.mobileapp.StartWorkoutFragment;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,7 @@ public class WorkoutFragment extends Fragment implements Workout_plansListener {
     private ListView lvWorkout_plan;
     private ListWorkout_planAdapter adapter;
     private SearchView searchView;
+    Button btTreinar;
     public static final String ID = "id";
     private static final int CODE_REQUEST_EDITAR = 2;
 
@@ -35,13 +39,14 @@ public class WorkoutFragment extends Fragment implements Workout_plansListener {
 
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_workout, container, false);
         setHasOptionsMenu(true);
-
+        btTreinar = view.findViewById(R.id.btTreinar);
         //obter instancia da listview
         lvWorkout_plan = view.findViewById(R.id.lvWorkout_plans);
 
@@ -62,6 +67,13 @@ public class WorkoutFragment extends Fragment implements Workout_plansListener {
         {
         lvWorkout_plan.setAdapter(adapter);
         }
+
+        btTreinar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startWorkoutFragment();
+            }
+        });
 
         lvWorkout_plan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -95,4 +107,12 @@ public class WorkoutFragment extends Fragment implements Workout_plansListener {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+    private void startWorkoutFragment(){
+        Fragment newFragment = new StartWorkoutFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }

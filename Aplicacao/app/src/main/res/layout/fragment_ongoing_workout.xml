@@ -45,13 +45,27 @@
 
     <Button
         android:id="@+id/btStop"
-        android:layout_width="250dp"
+        android:layout_width="146dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="30dp"
-        android:text="Parar"
+        android:layout_marginBottom="32dp"
+        android:text="Acabar"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btCancel"
+        android:layout_width="146dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Cancelar"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
