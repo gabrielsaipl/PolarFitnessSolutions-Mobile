@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,7 +29,8 @@ import java.util.ArrayList;
 public class FinishedWorkoutFragment extends Fragment {
 
     ListView lvFinishedWorkout_planDetails;
-    TextView tvFinishedWorkoutName, tvWorkoutDate, tvWorkoutDuration;
+    TextView tvFinishedWorkout_planName, tvWorkoutDate, tvWorkoutDuration;
+    EditText etFinishedWorkoutName;
     Button btVoltar;
     private Workout_Plan_Exercise_RelationAdapter adapter;
 
@@ -44,6 +46,7 @@ public class FinishedWorkoutFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,9 +55,10 @@ public class FinishedWorkoutFragment extends Fragment {
         setHasOptionsMenu(true);
 
         lvFinishedWorkout_planDetails = view.findViewById(R.id.lvFinishedWorkout_plan);
-        tvFinishedWorkoutName = view.findViewById(R.id.tvFinishedWorkoutName);
+        etFinishedWorkoutName = view.findViewById(R.id.etFinishedWorkoutName);
         tvWorkoutDate = view.findViewById(R.id.tvWorkoutDate);
         tvWorkoutDuration = view.findViewById(R.id.tvWorkoutDuration);
+        tvFinishedWorkout_planName = view.findViewById(R.id.tvFinishedWorkout_planName);
         btVoltar = view.findViewById(R.id.btVoltar);
 
         btVoltar.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +73,7 @@ public class FinishedWorkoutFragment extends Fragment {
         String s2 = sharedPreferences.getString("wkPlanName", "");
         String s3 = sharedPreferences.getString("dataInicioTreino","");
         String s4 = sharedPreferences.getString("TempoTreinoDecorrido","");
-        tvFinishedWorkoutName.setText(s2);
+        tvFinishedWorkout_planName.setText(s2);
         tvWorkoutDuration.setText(s4);
         tvWorkoutDate.setText(s3);
 

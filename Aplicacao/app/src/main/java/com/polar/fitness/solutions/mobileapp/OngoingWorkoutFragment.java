@@ -108,16 +108,16 @@ public class OngoingWorkoutFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-                alert.setTitle("Cancelar");
-                alert.setMessage("De certeza que deseja cancelar?");
-                alert.setPositiveButton(R.string.Cancelar, new DialogInterface.OnClickListener() {
+                alert.setTitle("Cancelar Treino");
+                alert.setMessage("De certeza que deseja cancelar o treino?");
+                alert.setPositiveButton("Cancelar Treino", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         TimeBuff += MillisecondTime;
                         handler.removeCallbacks(runnable);
                         StartWorkout();
                     }
                 });
-                alert.setNegativeButton(R.string.Continuar, new DialogInterface.OnClickListener() {
+                alert.setNegativeButton("Resumir", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // close dialog
                         dialog.cancel();
