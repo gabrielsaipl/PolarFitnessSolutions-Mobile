@@ -1,6 +1,7 @@
 package com.polar.fitness.solutions.mobileapp.Views.App;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -94,24 +95,26 @@ public class WorkoutFragment extends Fragment implements Workout_plansListener {
     }
     @Override
     public void onRefreshListWorkout_plans(ArrayList<Workout_plan> listWorkout_plan){
-        SharedPreferences sharedPreferences =  getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String s1 = sharedPreferences.getString("client_id", "");
-        int s2 = Integer.parseInt(s1);
-        ArrayList<Workout_plan> auxWorkout_plan = new ArrayList<>();
-        for (Workout_plan workout_plan: SingletonGestorUsers.getInstance(getContext()).getWorkout_plansBD())
-        {
-            if (workout_plan.getClient_id() == s2)
-            {
-                auxWorkout_plan.add(workout_plan);
-            }
-        }
-        adapter = new ListWorkout_planAdapter(getContext(), auxWorkout_plan);
 
-        if(lvWorkout_plan != null)
-        {
-            lvWorkout_plan.setAdapter(adapter);
-        }
-    }
+                if (getActivity() != null) {
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                    String s1 = sharedPreferences.getString("client_id", "");
+                    int s2 = Integer.parseInt(s1);
+                    ArrayList<Workout_plan> auxWorkout_plan = new ArrayList<>();
+                    for (Workout_plan workout_plan : SingletonGestorUsers.getInstance(getContext()).getWorkout_plansBD()) {
+                        if (workout_plan.getClient_id() == s2) {
+                            auxWorkout_plan.add(workout_plan);
+                        }
+                    }
+                    adapter = new ListWorkout_planAdapter(getContext(), auxWorkout_plan);
+
+                    if (lvWorkout_plan != null) {
+                        lvWorkout_plan.setAdapter(adapter);
+                    }
+                }
+                else {
+                }
+            }
 
     @Override
     public void onResume(ArrayList<Workout_plan> listWorkout_plan) {

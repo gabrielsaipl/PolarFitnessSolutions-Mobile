@@ -120,8 +120,6 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         String fragmentName = intent.getStringExtra("fragment");
         String workout = "WorkoutFragment";
         String nutrition = "NutritionFragment";
-        String physical = "PhysicalEvaluationFragment";
-        String messages = "MessagesFragment";
         String profile = "ProfileFragment";
         String startWorkout = "StartWorkoutFragment";
         Log.e("Test1", "Test1" + fragmentName);
