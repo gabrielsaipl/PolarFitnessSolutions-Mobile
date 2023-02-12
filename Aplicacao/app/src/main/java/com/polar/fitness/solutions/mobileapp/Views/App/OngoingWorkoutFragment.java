@@ -60,15 +60,20 @@ public class OngoingWorkoutFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ongoing_workout, container, false);
         setHasOptionsMenu(true);
+        //Instanciar componentes
         lvOngoingWorkoutPlanDetails = view.findViewById(R.id.lvOngoingWorkout_planDetailss);
         tvOngoingWorkoutName = view.findViewById(R.id.tvOngoingWorkoutName);
         Stop = (Button) view.findViewById(R.id.btStop);
         Cancel = (Button) view.findViewById(R.id.btCancel);
         tvTimer = (TextView) view.findViewById(R.id.textViewStopWatch);
         StartTime = SystemClock.uptimeMillis();
+
+        //Shared Preferences
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+
+        //Handler
         handler = new Handler() ;
         handler.postDelayed(runnable, 0);
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dataInicio = dateFormat.format(currentTime);
@@ -86,6 +91,7 @@ public class OngoingWorkoutFragment extends Fragment {
                 aux.add(relations);
             }
         }
+
         adapter = new Workout_Plan_Exercise_RelationAdapter(getContext(), aux);
         ArrayList<Exercise> aux2 = new ArrayList<>();
         int size = aux.size();
@@ -103,7 +109,8 @@ public class OngoingWorkoutFragment extends Fragment {
         adapter2 = new ListWorkout_planDetailsAdapter(getContext(), aux2);
         lvOngoingWorkoutPlanDetails.setAdapter(adapter2);
 
-        Cancel.setOnClickListener(new View.OnClickListener() {
+        Cancel.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
@@ -126,7 +133,8 @@ public class OngoingWorkoutFragment extends Fragment {
             }
         });
 
-        Stop.setOnClickListener(new View.OnClickListener() {
+        Stop.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 TimeBuff += MillisecondTime;
@@ -138,11 +146,20 @@ public class OngoingWorkoutFragment extends Fragment {
             }
         });
 
+
         return view;
     }
 
 
-    public Runnable runnable = new Runnable() {
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+    }
+
+    public Runnable runnable = new Runnable()
+    {
 
         public void run() {
 
@@ -167,15 +184,16 @@ public class OngoingWorkoutFragment extends Fragment {
         }
 
     };
-
-    private void finishWorkout(){
+    private void finishWorkout()
+    {
         Fragment newFragment = new FinishedWorkoutFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
-    private void StartWorkout(){
+    private void StartWorkout()
+    {
         Fragment newFragment = new StartWorkoutFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);

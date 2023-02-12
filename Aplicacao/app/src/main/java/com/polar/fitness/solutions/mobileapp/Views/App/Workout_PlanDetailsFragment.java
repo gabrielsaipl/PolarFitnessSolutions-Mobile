@@ -12,16 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.polar.fitness.solutions.mobileapp.Adapters.ListWorkout_planAdapter;
 import com.polar.fitness.solutions.mobileapp.Adapters.ListWorkout_planDetailsAdapter;
 import com.polar.fitness.solutions.mobileapp.Adapters.Workout_Plan_Exercise_RelationAdapter;
 import com.polar.fitness.solutions.mobileapp.Listeners.ExercisesListener;
-import com.polar.fitness.solutions.mobileapp.Listeners.Workout_Plan_Exercise_RelationListener;
-import com.polar.fitness.solutions.mobileapp.Listeners.Workout_plansListener;
 import com.polar.fitness.solutions.mobileapp.Models.Exercise;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_Plan_Exercise_Relation;
-import com.polar.fitness.solutions.mobileapp.Models.Workout_plan;
 import com.polar.fitness.solutions.mobileapp.R;
 
 import java.util.ArrayList;
@@ -87,7 +83,7 @@ public class Workout_PlanDetailsFragment extends Fragment implements ExercisesLi
     }
 
     @Override
-    public void onResume() {
+    public void onResume(ArrayList<Exercise> listExercises) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         int s1 = Integer.parseInt(sharedPreferences.getString("wkPlanId", ""));
         ArrayList<Workout_Plan_Exercise_Relation> aux = new ArrayList<>();
