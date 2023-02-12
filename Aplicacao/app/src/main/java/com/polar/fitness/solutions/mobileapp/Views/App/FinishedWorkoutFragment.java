@@ -16,7 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.polar.fitness.solutions.mobileapp.Adapters.ListWorkout_planDetailsAdapter;
 import com.polar.fitness.solutions.mobileapp.Adapters.Workout_Plan_Exercise_RelationAdapter;
 import com.polar.fitness.solutions.mobileapp.Models.Exercise;
@@ -61,9 +63,11 @@ public class FinishedWorkoutFragment extends Fragment {
         tvFinishedWorkout_planName = view.findViewById(R.id.tvFinishedWorkout_planName);
         btVoltar = view.findViewById(R.id.btVoltar);
 
+
         btVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "Treino guardado com sucesso", Toast.LENGTH_SHORT).show();
                 finishWorkout();
             }
         });
@@ -76,6 +80,9 @@ public class FinishedWorkoutFragment extends Fragment {
         tvFinishedWorkout_planName.setText(s2);
         tvWorkoutDuration.setText(s4);
         tvWorkoutDate.setText(s3);
+        String data = s3;
+        String data1 = "Treino " + data.substring(0, 10);
+        etFinishedWorkoutName.setText(data1);
 
         ArrayList<Workout_Plan_Exercise_Relation> aux = new ArrayList<>();
         for (Workout_Plan_Exercise_Relation relations: SingletonGestorUsers.getInstance(getContext()).getWorkout_plan_exercise_relations()){
