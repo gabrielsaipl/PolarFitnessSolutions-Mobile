@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         btnPerfil = findViewById(R.id.btnPerfil);
         username = findViewById(R.id.tvUsername);
 
+
+
         if(getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
@@ -74,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 

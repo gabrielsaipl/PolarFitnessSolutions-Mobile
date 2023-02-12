@@ -8,19 +8,19 @@
 
         <item
             android:id="@+id/nav_comecar_treino"
-            android:icon="@drawable/nav_settings"
+            android:icon="@drawable/nav_flag"
             android:title="@string/comecar_a_treinar"/>
         <item
             android:id="@+id/nav_treinos_completados"
-            android:icon="@drawable/nav_settings"
+            android:icon="@drawable/nav_history"
             android:title="@string/treinos"/>
         <item
             android:id="@+id/nav_treinos"
-            android:icon="@drawable/nav_settings"
+            android:icon="@drawable/nav_book"
             android:title="@string/planos_de_treino"/>
         <item
             android:id="@+id/nav_nutricao"
-            android:icon="@drawable/nav_share"
+            android:icon="@drawable/nav_nutrition"
             android:title="@string/planos_nutricionais"/>
         <item
             android:id="@+id/nav_Perfil"
