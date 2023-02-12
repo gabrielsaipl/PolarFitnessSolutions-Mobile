@@ -11,6 +11,10 @@
             android:icon="@drawable/nav_settings"
             android:title="@string/comecar_a_treinar"/>
         <item
+            android:id="@+id/nav_treinos_completados"
+            android:icon="@drawable/nav_settings"
+            android:title="@string/treinos"/>
+        <item
             android:id="@+id/nav_treinos"
             android:icon="@drawable/nav_settings"
             android:title="@string/planos_de_treino"/>

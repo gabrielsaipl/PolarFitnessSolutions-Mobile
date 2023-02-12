@@ -37,7 +37,6 @@ public class WorkoutFragment extends Fragment implements Workout_plansListener {
 
     }
 
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
