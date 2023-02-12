@@ -37,8 +37,6 @@ public class Workout_PlanDetailsFragment extends Fragment implements ExercisesLi
         // Required empty public constructor
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,8 +139,6 @@ public class Workout_PlanDetailsFragment extends Fragment implements ExercisesLi
             i++;
         }
         lvListExercises.setAdapter(new ListWorkout_planDetailsAdapter(getContext(), aux2));
-
-
 
     }
 }
