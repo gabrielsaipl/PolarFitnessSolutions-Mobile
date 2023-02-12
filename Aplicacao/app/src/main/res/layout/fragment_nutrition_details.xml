@@ -10,23 +10,25 @@
 
     <TextView
         android:id="@+id/teste2"
-        android:layout_width="298dp"
-        android:layout_height="86dp"
+        android:layout_width="295dp"
+        android:layout_height="56dp"
         android:layout_marginTop="52dp"
         android:text="Textview"
         android:textAlignment="center"
-        android:textSize="60sp"
+        android:textColor="#000000"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/teste3"
-        android:layout_width="293dp"
-        android:layout_height="440dp"
+        android:layout_width="336dp"
+        android:layout_height="716dp"
         android:layout_marginBottom="300dp"
         android:text="TextView"
         android:textAlignment="center"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

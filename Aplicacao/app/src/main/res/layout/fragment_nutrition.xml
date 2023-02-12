@@ -8,18 +8,51 @@
     tools:context=".Views.App.NutritionFragment">
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/tvPlanosNutricao"
-        android:layout_width="wrap_content"
-        android:layout_height="160dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif"
-        android:text="@string/StringPlanos"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="34sp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+        <TextView
+            android:id="@+id/tvPlanosNutricao"
+            android:layout_width="368dp"
+            android:layout_height="47dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/StringPlanos"
+            android:textSize="30sp"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue_primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.372"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.12" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="341dp"
+            android:layout_height="57dp"
+            android:fontFamily="sans-serif"
+            android:text="Aqui encontra todos os seus planos de treino"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.228"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.626" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            app:dividerColor="@color/blue_primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
         android:id="@+id/lvListNutritionPlan"
