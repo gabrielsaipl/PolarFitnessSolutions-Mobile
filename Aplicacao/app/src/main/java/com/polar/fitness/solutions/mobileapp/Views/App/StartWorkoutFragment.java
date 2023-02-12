@@ -2,9 +2,12 @@ package com.polar.fitness.solutions.mobileapp.Views.App;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -42,6 +45,14 @@ public class StartWorkoutFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent i = new Intent(getActivity(), MainActivity.class);
+                startActivity(i);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @SuppressLint("MissingInflatedId")
@@ -98,6 +109,8 @@ public class StartWorkoutFragment extends Fragment {
                 return false;
             }
         });
+
+
 
         btStartWorkout.setOnClickListener(new View.OnClickListener() {
             @Override

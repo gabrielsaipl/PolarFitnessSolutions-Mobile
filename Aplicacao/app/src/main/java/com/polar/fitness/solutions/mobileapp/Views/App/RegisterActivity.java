@@ -146,6 +146,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterListe
         return password.length() >= 8;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(i);
+    }
+
     public void codPostal() {
         etCodigoPostal.addTextChangedListener(new TextWatcher() {
             @Override
