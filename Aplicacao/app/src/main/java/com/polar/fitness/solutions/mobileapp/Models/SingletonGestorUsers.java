@@ -41,6 +41,7 @@ public class SingletonGestorUsers {
     private static RequestQueue volleyQueue = null;
     private final UserDBHelper usersDB;
 
+
     // Arraylists
     private ArrayList<User> users;
     private ArrayList<Nutrition_plan> nutrition_plans;
@@ -55,6 +56,7 @@ public class SingletonGestorUsers {
     private final static String mUrlAPIexercises = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/exercises";
     private final static String mUrlAPIworkout_plan = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/workoutplans";
     private final static String mUrlWorkout_Plan_Exercise_Relation = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/workout_plan_exercise_relation";
+    private ArrayList<Workout> workouts;
 
 
 
@@ -177,7 +179,7 @@ public class SingletonGestorUsers {
         // Aceder a sharedPreferences
         SharedPreferences sh = contexto.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         String s1 = sh.getString("client_id", "");
-        final String mUrlUpdateUser = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/users/" + s1;
+        final String mUrlUpdateUser = "http://192.168.1.14/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/users/" + s1;
         StringRequest request = new StringRequest(Request.Method.PUT, mUrlUpdateUser, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -417,6 +419,7 @@ public class SingletonGestorUsers {
     public void addWorkout_plan_exercise_relationBD(Workout_Plan_Exercise_Relation workout_plan_exercise_relation){
         usersDB.addWorkout_Plan_Exercise_RelationBD(workout_plan_exercise_relation);
     }
+
     public void addWorkout_plan_exercise_relationsBD(ArrayList<Workout_Plan_Exercise_Relation> list){
         usersDB.removeAllWorkout_Plan_Exercise_Relation();
         for (Workout_Plan_Exercise_Relation workout_plan_exercise_relation: workout_plan_exercise_relations){
@@ -429,7 +432,17 @@ public class SingletonGestorUsers {
         usersDB.addUserBD(user);
     }
 
+
     public ArrayList<User> getUserBD(){
         return users = usersDB.getUserBD();
     }
+
+    public void addWorkoutBD(Workout workout){
+        usersDB.addWorkoutBD(workout);
+    }
+
+    public ArrayList<Workout> getWorkoutsBD(){
+        return workouts = usersDB.getAllWorkoutBD();
+    }
+
 }

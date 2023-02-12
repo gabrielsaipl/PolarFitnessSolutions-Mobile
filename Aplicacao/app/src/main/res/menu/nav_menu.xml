@@ -6,22 +6,21 @@
     <group
         android:checkableBehavior="single">
 
-
         <item
             android:id="@+id/nav_comecar_treino"
             android:icon="@drawable/nav_settings"
-            android:title="Comecar a treinar"/>
+            android:title="@string/comecar_a_treinar"/>
         <item
             android:id="@+id/nav_treinos"
             android:icon="@drawable/nav_settings"
-            android:title="Planos de Treino"/>
+            android:title="@string/planos_de_treino"/>
         <item
             android:id="@+id/nav_nutricao"
             android:icon="@drawable/nav_share"
-            android:title="Planos Nutricionais"/>
+            android:title="@string/planos_nutricionais"/>
         <item
             android:id="@+id/nav_Perfil"
             android:icon="@drawable/nav_settings"
-            android:title="Perfil"/>
+            android:title="@string/perfil"/>
     </group>
 </menu>

@@ -1,4 +1,4 @@
-package com.polar.fitness.solutions.mobileapp;
+package com.polar.fitness.solutions.mobileapp.Views.App;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.polar.fitness.solutions.mobileapp.Adapters.ListWorkout_planAdapter;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_plan;
+import com.polar.fitness.solutions.mobileapp.R;
+import com.polar.fitness.solutions.mobileapp.Views.App.OngoingWorkoutFragment;
 import com.polar.fitness.solutions.mobileapp.Views.App.Workout_PlanDetailsFragment;
 
 import java.util.ArrayList;

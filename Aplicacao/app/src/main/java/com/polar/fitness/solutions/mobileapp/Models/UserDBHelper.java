@@ -59,6 +59,16 @@ public class UserDBHelper extends SQLiteOpenHelper {
     private final static String workout_plan_exercise_relation_ID = "id";
     private final static String workout_plan_exercise_relation_WORKOUT_PLAN_ID = "workout_plan_id";
     private final static String workout_plan_exercise_relation_EXERCISE_ID = "exercise_id";
+
+    //workout
+    private final static String workout_TABLE_NAME = "workout";
+    private final static String workout_ID = "id";
+    private final static String workout_NAME = "name";
+    private final static String workout_DATE = "date";
+    private final static String workout_DURATION = "duration";
+    private final static String workout_WORKOUT_PLAN_NAME = "workout_plan_name";
+    private final static String workout_WORKOUT_PLAN_ID = "workout_plan_id";
+
     private SQLiteDatabase db;
 
     public UserDBHelper(Context contexto) {
@@ -97,17 +107,24 @@ public class UserDBHelper extends SQLiteOpenHelper {
                 + exercise_MAX_REP + " INTEGER NOT NULL, "
                 + exercise_MIN_REP + " INTEGER NOT NULL, "
                 + exercise_SETS + " INTEGER NOT NULL);";
-
         String sqltable5 = "CREATE TABLE " + workout_plan_exercise_relation_TABLE_NAME + "("
                 + workout_plan_exercise_relation_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + workout_plan_exercise_relation_WORKOUT_PLAN_ID + " INTEGER  NOT NULL,"
                 + workout_plan_exercise_relation_EXERCISE_ID + " INTEGER NOT NULL);";
+        String sqltable6 = "CREATE TABLE " + workout_TABLE_NAME + "("
+                + workout_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + workout_NAME + " TEXT NOT NULL, "
+                + workout_DATE + " TEXT NOT NULL, "
+                + workout_DURATION + " TEXT NOT NULL, "
+                + workout_WORKOUT_PLAN_NAME + " TEXT NOT NULL, "
+                + workout_WORKOUT_PLAN_ID + " INTEGER NOT NULL);";
 
         db.execSQL(sqltable1);
         db.execSQL(sqltable2);
         db.execSQL(sqltable3);
         db.execSQL(sqltable4);
         db.execSQL(sqltable5);
+        db.execSQL(sqltable6);
     }
 
     @Override
@@ -117,6 +134,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + workout_plan_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + exercise_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + workout_plan_exercise_relation_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + workout_TABLE_NAME);
         this.onCreate(sqLiteDatabase);
     }
 
@@ -361,6 +379,54 @@ public class UserDBHelper extends SQLiteOpenHelper {
     public void removeAllWorkout_Plan_Exercise_Relation()
     {
         db.delete(workout_plan_exercise_relation_TABLE_NAME, null, null);
+    }
+
+    //Workout
+    public Workout addWorkoutBD(Workout workout)
+    {
+        ContentValues values = new ContentValues();
+        values.put(workout_NAME, workout.getName());
+        values.put(workout_DATE, workout.getDate());
+        values.put(workout_DURATION, workout.getDuration());
+        values.put(workout_WORKOUT_PLAN_NAME, workout.getWorkout_planName());
+        values.put(workout_WORKOUT_PLAN_ID, workout.getWorkout_planId());
+
+        long id = this.db.insert(workout_TABLE_NAME, null, values);
+
+        if (id > -1)
+        {
+            workout.setId((int) id);
+            return workout;
+        }
+
+        return null;
+    }
+
+    public ArrayList<Workout> getAllWorkoutBD()
+    {
+        ArrayList<Workout> workout = new ArrayList<>();
+        Cursor cursor = this.db.query(workout_TABLE_NAME, new String[]{workout_ID, workout_NAME, workout_DATE, workout_DURATION,workout_WORKOUT_PLAN_NAME,workout_WORKOUT_PLAN_ID}, null, null, null,null, null);
+        if(cursor.moveToFirst()){
+            do{
+                Workout aux = new Workout(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getInt(5));
+                workout.add(aux);
+            }while (cursor.moveToNext());
+        }
+        return workout;
+    }
+
+    public void removeAllWorkoutDB(){
+        db.delete(workout_TABLE_NAME, null, null);
+    }
+
+    public boolean removeWorkoutDB(long id){
+        int nreg = this.db.delete(workout_TABLE_NAME, workout_ID + " =?", new String[]{"" + id});
+        return nreg > 0;
     }
 
 }

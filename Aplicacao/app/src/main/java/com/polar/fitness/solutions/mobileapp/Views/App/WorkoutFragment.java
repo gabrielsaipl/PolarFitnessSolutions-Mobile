@@ -18,11 +18,9 @@ import android.widget.SearchView;
 
 import com.polar.fitness.solutions.mobileapp.Adapters.ListWorkout_planAdapter;
 import com.polar.fitness.solutions.mobileapp.Listeners.Workout_plansListener;
-import com.polar.fitness.solutions.mobileapp.Models.Nutrition_plan;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_plan;
 import com.polar.fitness.solutions.mobileapp.R;
-import com.polar.fitness.solutions.mobileapp.StartWorkoutFragment;
 
 import java.util.ArrayList;
 

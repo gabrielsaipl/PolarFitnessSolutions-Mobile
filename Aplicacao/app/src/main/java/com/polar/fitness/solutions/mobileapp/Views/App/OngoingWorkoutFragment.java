@@ -1,4 +1,4 @@
-package com.polar.fitness.solutions.mobileapp;
+package com.polar.fitness.solutions.mobileapp.Views.App;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -25,8 +25,7 @@ import com.polar.fitness.solutions.mobileapp.Adapters.Workout_Plan_Exercise_Rela
 import com.polar.fitness.solutions.mobileapp.Models.Exercise;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_Plan_Exercise_Relation;
-import com.polar.fitness.solutions.mobileapp.Views.App.FinishedWorkoutFragment;
-import com.polar.fitness.solutions.mobileapp.Views.App.WorkoutFragment;
+import com.polar.fitness.solutions.mobileapp.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -21,10 +21,12 @@ import com.polar.fitness.solutions.mobileapp.Adapters.ListWorkout_planDetailsAda
 import com.polar.fitness.solutions.mobileapp.Adapters.Workout_Plan_Exercise_RelationAdapter;
 import com.polar.fitness.solutions.mobileapp.Models.Exercise;
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
+import com.polar.fitness.solutions.mobileapp.Models.Workout;
 import com.polar.fitness.solutions.mobileapp.Models.Workout_Plan_Exercise_Relation;
 import com.polar.fitness.solutions.mobileapp.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FinishedWorkoutFragment extends Fragment {
 
@@ -32,10 +34,8 @@ public class FinishedWorkoutFragment extends Fragment {
     TextView tvFinishedWorkout_planName, tvWorkoutDate, tvWorkoutDuration;
     EditText etFinishedWorkoutName;
     Button btVoltar;
-    private Workout_Plan_Exercise_RelationAdapter adapter;
-
-    private ListWorkout_planDetailsAdapter adapter2;
-
+    String s2,s3,s4;
+    int s1;
 
     public FinishedWorkoutFragment() {
         // Required empty public constructor
@@ -68,11 +68,11 @@ public class FinishedWorkoutFragment extends Fragment {
             }
         });
 
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        int s1 = Integer.parseInt(sharedPreferences.getString("wkPlanId", ""));
-        String s2 = sharedPreferences.getString("wkPlanName", "");
-        String s3 = sharedPreferences.getString("dataInicioTreino","");
-        String s4 = sharedPreferences.getString("TempoTreinoDecorrido","");
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        s1 = Integer.parseInt(sharedPreferences.getString("wkPlanId", ""));
+        s2 = sharedPreferences.getString("wkPlanName", "");
+        s3 = sharedPreferences.getString("dataInicioTreino","");
+        s4 = sharedPreferences.getString("TempoTreinoDecorrido","");
         tvFinishedWorkout_planName.setText(s2);
         tvWorkoutDuration.setText(s4);
         tvWorkoutDate.setText(s3);
@@ -83,7 +83,7 @@ public class FinishedWorkoutFragment extends Fragment {
                 aux.add(relations);
             }
         }
-        adapter = new Workout_Plan_Exercise_RelationAdapter(getContext(), aux);
+        Workout_Plan_Exercise_RelationAdapter adapter = new Workout_Plan_Exercise_RelationAdapter(getContext(), aux);
         ArrayList<Exercise> aux2 = new ArrayList<>();
         int size = aux.size();
         int i = 0;
@@ -97,12 +97,15 @@ public class FinishedWorkoutFragment extends Fragment {
             i++;
         }
 
-        adapter2 = new ListWorkout_planDetailsAdapter(getContext(), aux2);
+        ListWorkout_planDetailsAdapter adapter2 = new ListWorkout_planDetailsAdapter(getContext(), aux2);
         lvFinishedWorkout_planDetails.setAdapter(adapter2);
         return view;
     }
 
     private void finishWorkout(){
+        String wkName = etFinishedWorkoutName.getText().toString();
+        Workout workout = new Workout( wkName, s3, s4, s2, s1);
+        SingletonGestorUsers.getInstance(getContext()).addWorkoutBD(workout);
         Intent intent = new Intent(this.getContext(), MainActivity.class);
         startActivity(intent);
     }

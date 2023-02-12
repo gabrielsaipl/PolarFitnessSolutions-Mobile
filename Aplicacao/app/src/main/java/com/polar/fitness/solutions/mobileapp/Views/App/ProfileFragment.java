@@ -1,4 +1,4 @@
-package com.polar.fitness.solutions.mobileapp;
+package com.polar.fitness.solutions.mobileapp.Views.App;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.polar.fitness.solutions.mobileapp.Models.SingletonGestorUsers;
 import com.polar.fitness.solutions.mobileapp.Models.User;
+import com.polar.fitness.solutions.mobileapp.R;
 import com.polar.fitness.solutions.mobileapp.databinding.FragmentProfileBinding;
 
 import java.io.File;

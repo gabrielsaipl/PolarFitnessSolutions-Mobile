@@ -53,4 +53,8 @@
     <string name="StringEditar">Editar</string>
     <string name="StringTreinar">Treinar</string>
     <string name="StringGuardar">Guardar</string>
+    <string name="comecar_a_treinar">Comecar a treinar</string>
+    <string name="planos_de_treino">Planos de Treino</string>
+    <string name="planos_nutricionais">Planos Nutricionais</string>
+    <string name="perfil">Perfil</string>
 </resources>

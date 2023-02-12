@@ -21,9 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.polar.fitness.solutions.mobileapp.ProfileFragment;
 import com.polar.fitness.solutions.mobileapp.R;
-import com.polar.fitness.solutions.mobileapp.StartWorkoutFragment;
 
 import java.io.File;
 import java.io.FileInputStream;
