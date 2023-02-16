@@ -125,6 +125,10 @@ public class ProfileFragment extends Fragment {
             FragmentTransaction tr = getFragmentManager().beginTransaction();
             tr.replace(R.id.fragment_container, ProfileFragment.this);
             tr.commit();
+            SharedPreferences.Editor myEdit = sh.edit();
+            myEdit.putString("etUsername", username);
+            myEdit.putString("email", email);
+            myEdit.apply();
             Toast.makeText(getContext(), "Dados alterados com sucesso", Toast.LENGTH_SHORT).show();
         });
     }

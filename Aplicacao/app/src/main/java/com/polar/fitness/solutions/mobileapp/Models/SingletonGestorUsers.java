@@ -179,7 +179,7 @@ public class SingletonGestorUsers {
         // Aceder a sharedPreferences
         SharedPreferences sh = contexto.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         String s1 = sh.getString("client_id", "");
-        final String mUrlUpdateUser = "http://192.168.1.14/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/users/" + s1;
+        final String mUrlUpdateUser = "http://10.0.2.2/github/PolarFitnessSolutions-Portal/PolarFitnessSolutions/backend/web/api/users/" + s1;
         StringRequest request = new StringRequest(Request.Method.PUT, mUrlUpdateUser, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
